@@ -1,0 +1,12 @@
+/*@import url('https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2');
+@import url('https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2');*/
+
+@font-face {
+   font-family: "udemy sans";
+   src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2") format('woff');
+ }
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
