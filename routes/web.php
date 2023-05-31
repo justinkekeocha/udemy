@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use Inertia\Inertia;
+
 Route::get('/', function () {
    return Inertia::render("Home");
+})->name('home');
+
+Route::prefix('/courses')->controller(CategoryController::class)->name('category.')->group(function () {
+   Route::get('/{category}', 'show')->name('show');
 });
+
+

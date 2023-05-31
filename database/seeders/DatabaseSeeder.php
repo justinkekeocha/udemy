@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Faker\Factory;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Database\Seeder;
@@ -21,6 +22,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        //Makes data consistent for each seeding
+        Factory::create()->seed(1234);
 
         Category::factory(6)
         ->has(SubCategory::factory(9))
