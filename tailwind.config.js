@@ -10,7 +10,8 @@ module.exports = {
     extend: {
       fontFamily: {
         /**Udemy sans is defined in app.css */
-        'sans': ['udemy sans'],
+        'udemy sans': ['udemy sans'],
+        'SuisseWorks' : ['SuisseWorks'],
       }
     },
   },

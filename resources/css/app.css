@@ -6,7 +6,18 @@
    src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2") format('woff');
  }
 
+ @font-face {
+  font-family: "SuisseWorks";
+  src: url("https://www.udemy.com/staticx/udemy/fonts/SuisseWorks-Bold-v1.woff2") format('woff');
+}
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: udemy sans;
+  }
+}
