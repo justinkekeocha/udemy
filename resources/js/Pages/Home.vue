@@ -1,7 +1,6 @@
 <script setup>
 import { useSubCategoryStore } from "../Stores/SubCategoryStore";
 import Button1 from "/resources/js/Components/Buttons/Button1.vue";
-
 const subCategoryStore = useSubCategoryStore();
 subCategoryStore.getSubCategories();
 </script>
@@ -126,11 +125,10 @@ subCategoryStore.getSubCategories();
           data-tabs-toggle="#coursesTab"
           role="tablist"
         >
-
-        {{ Object.entries(subCategoryStore.groupedSubCategories)[0] }}
           <li
             class="mr-2"
             role="presentation"
+            v-if="subCategoryStore.groupedSubCategories"
             v-for="subCategory in Object.values(subCategoryStore.groupedSubCategories)[0]"
           >
             <button
