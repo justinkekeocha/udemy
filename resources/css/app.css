@@ -20,4 +20,11 @@
   html {
     font-family: udemy sans;
   }
+
+  h1 {
+    @apply text-4xl font-extrabold font-SuisseWorks mb-3;
+  }
+  h2 {
+    @apply text-3xl font-extrabold font-SuisseWorks mb-3;
+  }
 }

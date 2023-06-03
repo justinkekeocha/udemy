@@ -1,11 +1,11 @@
 import "./bootstrap";
 
-import { createApp, h, computed, reactive } from "vue";
-import { createInertiaApp, Head, Link, usePage } from "@inertiajs/vue3";
+import { createApp, h} from "vue";
+import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 import Layout from "/resources/js/Components/Layout.vue";
 import { initFlowbite } from "flowbite";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/src/js/vue";
-import route from "../../vendor/tightenco/ziggy/src/js";
+import { createPinia } from "pinia";
 
 
 createInertiaApp({
@@ -20,6 +20,7 @@ createInertiaApp({
 
         app.use(plugin)
             .use(ZiggyVue)
+            .use(createPinia())
             .component("Layout", Layout)
             .component("Head", Head)
             .component("Link", Link)
