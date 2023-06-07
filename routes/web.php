@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\SubCategory;
+use Illuminate\Support\Facades\Route;
+use App\Http\Resources\SubCategoryResource;
+use App\Http\Controllers\CategoryController;
+use App\Http\Resources\CourseResource;
+use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +21,10 @@ use Inertia\Inertia;
 
 
 Route::get('/', function () {
-   return Inertia::render("Home");
+   //$subCategories = SubCategoryResource::collection(SubCategory::all()->where('category_id', 1));
+   $subCategories = SubCategoryResource::collection(SubCategory::all());
+   $courses =  CourseResource::collection(Course::all());
+   return Inertia::render("Home", compact('subCategories', 'courses'));
 })->name('home');
 
 Route::prefix('/courses')->controller(CategoryController::class)->name('category.')->group(function () {

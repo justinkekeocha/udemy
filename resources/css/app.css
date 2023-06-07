@@ -2,7 +2,7 @@
 @import url('https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2');*/
 
 @font-face {
-   font-family: "udemy sans";
+   font-family: "UdemySans";
    src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2") format('woff');
  }
 
@@ -18,7 +18,7 @@
 
 @layer base {
   html {
-    font-family: udemy sans;
+    font-family: UdemySans;
   }
 
   h1 {

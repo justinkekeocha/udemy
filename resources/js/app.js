@@ -3,7 +3,8 @@ import "./bootstrap";
 import { createApp, h} from "vue";
 import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 import Layout from "/resources/js/Components/Layout.vue";
-import { initFlowbite } from "flowbite";
+//import { initFlowbite } from "flowbite";
+import 'flowbite';
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/src/js/vue";
 import { createPinia } from "pinia";
 
@@ -26,6 +27,6 @@ createInertiaApp({
             .component("Link", Link)
             .mount(el);
 
-        initFlowbite();
+        //initFlowbite();
     },
 });
