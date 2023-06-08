@@ -4,7 +4,6 @@ import Button1 from "/resources/js/Components/Buttons/Button1.vue";
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 
 onMounted(() => {
-
    const slidesContainer = document.querySelector(".slides-container");
    const slideWidth = slidesContainer.querySelector(".slide").clientWidth;
    const prevButton = document.querySelector(".prev");
@@ -17,8 +16,7 @@ onMounted(() => {
    prevButton.addEventListener("click", () => {
       slidesContainer.scrollLeft -= slideWidth;
    });
-
-})
+});
 
 const props = defineProps({
    subCategories: Object,
@@ -45,7 +43,7 @@ const courseSubCategories = Object.values(
 </style>
 
 <template>
-   <Layout title="Online Courses - Learn Anything, On Your Schedule | Udemy" description="hello">
+   <Layout :title="'Online Courses - Learn Anything, On Your Schedule | ' + $page.props.appName" description="hello">
       <section>
          <div id="animation-carousel" class="relative w-full" data-carousel="static">
             <!-- Carousel wrapper -->
@@ -137,14 +135,65 @@ const courseSubCategories = Object.values(
          <div id="coursesTab" class="border border-stone-400">
             <!-- Loop through subcategories-->
             <template v-for="(row, index) in courseSubCategories">
-               <div class="hidden p-5" :id="row.name + '-tab'" role="tabpanel">
-                  <h2 class="font-UdemySans text-2xl tracking-tight">Expand your career opportunities with {{ row.name }}</h2>
-                  <p class="line-clamp-3 text-ellipsis w-2/3">Take one of Udemy’s range of {{ row.name }} courses and learn how to code using this incredibly useful language. Its simple syntax and readability makes {{ row.name }} perfect for Flask, Django, data science, and machine learning. You’ll learn how to build everything from games to sites to apps. Choose from a range of courses that will appeal to</p>
+               <div class="hidden p-10" :id="row.name + '-tab'" role="tabpanel">
+                  <h2 class="font-UdemySans text-2xl tracking-tight">
+                     Expand your career opportunities with {{ row.name }}
+                  </h2>
+                  <p class="line-clamp-3 text-ellipsis md:w-2/3">
+                     Take one of {{ $page.props.appName }}’s range of {{ row.name }} courses and
+                     learn how to code using this incredibly useful language. Its simple syntax
+                     and readability makes {{ row.name }} perfect for Flask, Django, data
+                     science, and machine learning. You’ll learn how to build everything from
+                     games to sites to apps. Choose from a range of courses that will appeal to
+                  </p>
+                  <Link class="my-5" type="button" href="#">
+                  <Button1>Explore {{ row.name }}</Button1>
+                  </Link>
                   <!-- Get only courses that belong to that subcategory-->
-                  <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
-                     row.id
-                  ]">
-                  </template>
+                  <div class="relative">
+                     <div
+                        class="slides-container h-72 flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0">
+                        <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
+                           row.id
+                           ]">
+                           <div>
+                              <img class="w-full h-32 object-cover"
+                                 src="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1600"
+                                 alt="mountain_image" />
+                           </div>
+                           <div>
+                           </div>
+                        </template>
+                        <!-- Slider controls -->
+                        <button type="button"
+                           class="absolute top-0 -left-10 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                           data-carousel-prev>
+                           <span
+                              class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                              <svg aria-hidden="true"
+                                 class="w-5 h-5 text-white font-black sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                                 </path>
+                              </svg>
+                              <span class="sr-only">Previous</span>
+                           </span>
+                        </button>
+                        <button type="button"
+                           class="absolute top-0 -right-8 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                           data-carousel-next>
+                           <span
+                              class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                              <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                 </path>
+                              </svg>
+                              <span class="sr-only">Next</span>
+                           </span>
+                        </button>
+                     </div>
+                  </div>
                </div>
             </template>
          </div>

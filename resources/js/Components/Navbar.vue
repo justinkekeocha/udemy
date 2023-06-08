@@ -41,7 +41,7 @@ watchEffect(async () => {
         <ul
           class="text-sm font-medium text-gray-900 bg-whit rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         >
-          <span v-for="row in categoryStore.categories">
+          <template v-for="row in categoryStore.categories">
             <li
               class="w-full px-4 py-2 hover:text-purple-600"
               :data-dropdown-toggle="'subCategory' + row.id + 'Dropdown'"
@@ -69,11 +69,11 @@ watchEffect(async () => {
                 </svg>
               </Link>
             </li>
-          </span>
+          </template>
         </ul>
       </Popover>
 
-      <div
+      <template
         v-if="subCategoryStore.groupedSubCategories"
         v-for="(subCategory, index) in subCategoryStore.groupedSubCategories"
       >
@@ -91,7 +91,7 @@ watchEffect(async () => {
             </li>
           </ul>
         </div>
-      </div>
+      </template>
     </div>
 
     <div class="relative h-[3.0rem] grow">
