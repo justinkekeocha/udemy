@@ -2,15 +2,16 @@
 @import url('https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2');*/
 
 @font-face {
-   font-family: "UdemySans";
-   src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2") format('woff');
- }
-
- @font-face {
-  font-family: "SuisseWorks";
-  src: url("https://www.udemy.com/staticx/udemy/fonts/SuisseWorks-Bold-v1.woff2") format('woff');
+  font-family: "UdemySans";
+  src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2")
+    format("woff");
 }
 
+@font-face {
+  font-family: "SuisseWorks";
+  src: url("https://www.udemy.com/staticx/udemy/fonts/SuisseWorks-Bold-v1.woff2")
+    format("woff");
+}
 
 @tailwind base;
 @tailwind components;
@@ -26,5 +27,8 @@
   }
   h2 {
     @apply text-3xl font-extrabold font-SuisseWorks mb-3;
+  }
+  h3 {
+    @apply text-2xl font-extrabold font-UdemySans mb-3;
   }
 }

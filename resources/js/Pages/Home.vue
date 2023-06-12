@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import Button1 from "/resources/js/Components/Buttons/Button1.vue";
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
+import StarRating from "../Components/StarRating.vue";
 
 onMounted(() => {
    const slidesContainer = document.querySelector(".slides-container");
@@ -121,13 +122,13 @@ const courseSubCategories = Object.values(
                <li class="mr-2" role="presentation" v-for="(row, index) in courseSubCategories" :key="index">
                   <button :class="{
                         'inline-block p-4 text-gray-500 aria-selected:text-gray-950': true,
-                     }" :data-tabs-target="'#' + row.name + '-tab'" type="button" role="tab">
-                     {{ row.name }}
+                     }" :data-tabs-target="'#' + row.title + '-tab'" type="button" role="tab">
+                     {{ row.title }}
                   </button>
                   <!--<button
                      :class="{ 'inline-block p-4 text-gray-950': true, 'aria-selected:hover:text-gray-950': index === 0 }"
-                     :data-tabs-target="'#' + row.name + '-tab'" type="button" role="tab">
-                     {{ row.name }}
+                     :data-tabs-target="'#' + row.title + '-tab'" type="button" role="tab">
+                     {{ row.title }}
                   </button>-->
                </li>
             </ul>
@@ -135,38 +136,63 @@ const courseSubCategories = Object.values(
          <div id="coursesTab" class="border border-stone-400">
             <!-- Loop through subcategories-->
             <template v-for="(row, index) in courseSubCategories">
-               <div class="hidden p-10" :id="row.name + '-tab'" role="tabpanel">
+               <div class="hidden p-10" :id="row.title + '-tab'" role="tabpanel">
                   <h2 class="font-UdemySans text-2xl tracking-tight">
-                     Expand your career opportunities with {{ row.name }}
+                     Expand your career opportunities with {{ row.title }}
                   </h2>
                   <p class="line-clamp-3 text-ellipsis md:w-2/3">
-                     Take one of {{ $page.props.appName }}’s range of {{ row.name }} courses and
+                     Take one of {{ $page.props.appName }}’s range of {{ row.title }} courses and
                      learn how to code using this incredibly useful language. Its simple syntax
-                     and readability makes {{ row.name }} perfect for Flask, Django, data
+                     and readability makes {{ row.title }} perfect for Flask, Django, data
                      science, and machine learning. You’ll learn how to build everything from
                      games to sites to apps. Choose from a range of courses that will appeal to
                   </p>
                   <Link class="my-5" type="button" href="#">
-                  <Button1>Explore {{ row.name }}</Button1>
+                  <Button1>Explore {{ row.title }}</Button1>
                   </Link>
                   <!-- Get only courses that belong to that subcategory-->
                   <div class="relative">
                      <div
-                        class="slides-container h-72 flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0">
+                        class="slides-container flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0">
                         <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
                            row.id
-                           ]">
-                           <div>
+                        ]">
+                           <Link class="my-5" href="#">
+                           <div class="slide w-56">
+                              <img
+                                 class="w-full h-32 object-cover border border-stone-400 hover:transition-opacity hover:opacity-80"
+                                 :src="row.image" alt="" />
+                              <div class="p-5">
+                                 <h3 class="text-base line-clamp-2 text-ellipsis tracking-tight mb-0">
+                                    {{ row.title }}
+                                 </h3>
+                                 <p class="text-sm line-clamp-1 text-ellipsis text-gray-400">{{ row.instructor.name }}</p>
+                                 <StarRating></StarRating>
+                                 <p class="mb-3 font-bold">₦ {{ row.price }} <span
+                                       class="line-through text-gray-400 text-sm font-normal ms-1">{{
+                                          row.inflated_price }}</span>
+                                 </p>
+                              </div>
+                           </div>
+                           </Link>
+
+                           <!--<div class="flex">
                               <img class="w-full h-32 object-cover"
                                  src="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1600"
                                  alt="mountain_image" />
                            </div>
                            <div>
-                           </div>
+                              <h3>
+                                 <Link class="my-5" href="#">
+                                 The Complete Python Bootcamp From Zero to Hero in Python
+                                 </Link>
+                              </h3>
+                              <div></div>
+                           </div> -->
                         </template>
                         <!-- Slider controls -->
                         <button type="button"
-                           class="absolute top-0 -left-10 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                           class="absolute top-0 -left-12 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                            data-carousel-prev>
                            <span
                               class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
