@@ -1,22 +1,43 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import Button1 from "/resources/js/Components/Buttons/Button1.vue";
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import StarRating from "../Components/StarRating.vue";
 
+const slidesContainerRef = ref(null);
+//const slides = ref(null);
+
 onMounted(() => {
-   const slidesContainer = document.querySelector(".slides-container");
-   const slideWidth = slidesContainer.querySelector(".slide").clientWidth;
-   const prevButton = document.querySelector(".prev");
-   const nextButton = document.querySelector(".next");
+   //Get all slideContainers
+   const slideContainers = document.getElementsByClassName("slides-container");
+   //Get number of slideContainers
+   const numberOfSlideContainers = slideContainers.length
 
-   nextButton.addEventListener("click", () => {
-      slidesContainer.scrollLeft += slideWidth;
-   });
+   for (var i = 0; i < numberOfSlideContainers; i++) {
+      slideContainers[i].querySelectorAll("[data-slide-next]")
 
-   prevButton.addEventListener("click", () => {
-      slidesContainer.scrollLeft -= slideWidth;
-   });
+   }
+
+   console.log(slideContainers)
+
+
+
+
+
+   //find the respective controls in each container
+   //add a click event to each of the slide
+
+   // const slidesContainer = document.querySelector(".slides-container");
+   // const prevButton = document.querySelector("#previousSlide");
+   // const nextButton = document.querySelector("#nextSlide");
+
+   // nextButton.addEventListener("click", () => {
+   //    slidesContainer.scrollLeft += (window.screen.availWidth / 2);
+   // });
+
+   // prevButton.addEventListener("click", () => {
+   //    slidesContainer.scrollLeft -= (window.screen.availWidth / 2);
+   // });
 });
 
 const props = defineProps({
@@ -50,7 +71,7 @@ const courseSubCategories = Object.values(
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                <!-- Item 1 -->
-               <div class="hidden duration-1000 ease-out" data-carousel-item>
+               <div class="hidden duration-1000 ease-in-out" data-carousel-item>
                   <div>
                      <img src="../../../public/assets/img/carousel-1.jpg" class="block w-full object-cover object-center"
                         alt="..." />
@@ -65,7 +86,7 @@ const courseSubCategories = Object.values(
                   </div>
                </div>
                <!-- Item 2 -->
-               <div class="hidden duration-1000 ease-out" data-carousel-item>
+               <div class="hidden duration-1000 ease-in-out" data-carousel-item>
                   <img src="../../../public/assets/img/carousel-2.jpg"
                      class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
                   <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
@@ -151,231 +172,66 @@ const courseSubCategories = Object.values(
                   <Button1>Explore {{ row.title }}</Button1>
                   </Link>
                   <!-- Get only courses that belong to that subcategory-->
-                  <div class="relative">
-                     <div
-                        class="slides-container flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0">
-                        <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
-                           row.id
-                        ]">
-                           <Link class="my-5" href="#">
-                           <div class="slide w-56">
-                              <img
-                                 class="w-full h-32 object-cover border border-stone-400 hover:transition-opacity hover:opacity-80"
-                                 :src="row.image" alt="" />
-                              <div class="p-5">
-                                 <h3 class="text-base line-clamp-2 text-ellipsis tracking-tight mb-0">
-                                    {{ row.title }}
-                                 </h3>
-                                 <p class="text-sm line-clamp-1 text-ellipsis text-gray-400">{{ row.instructor.name }}</p>
-                                 <StarRating></StarRating>
-                                 <p class="mb-3 font-bold">₦ {{ row.price }} <span
-                                       class="line-through text-gray-400 text-sm font-normal ms-1">{{
-                                          row.inflated_price }}</span>
-                                 </p>
-                              </div>
-                           </div>
-                           </Link>
-
-                           <!--<div class="flex">
-                              <img class="w-full h-32 object-cover"
-                                 src="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1600"
-                                 alt="mountain_image" />
-                           </div>
-                           <div>
-                              <h3>
-                                 <Link class="my-5" href="#">
-                                 The Complete Python Bootcamp From Zero to Hero in Python
-                                 </Link>
+                  <div
+                     class="relative slides-container flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] after:w-[45vw] md:before:w-0 md:after:w-0">
+                     <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
+                        row.id
+                     ]">
+                        <Link class="my-5" href="#">
+                        <div class="slide w-56" ref="slides">
+                           <img
+                              class="w-full h-32 object-cover border border-stone-400 hover:transition-opacity hover:opacity-80"
+                              :src="row.image" alt="" />
+                           <div class="p-5">
+                              <h3 class="text-base line-clamp-2 text-ellipsis tracking-tight mb-0">
+                                 {{ row.title }}
                               </h3>
-                              <div></div>
-                           </div> -->
-                        </template>
-                        <!-- Slider controls -->
-                        <button type="button"
-                           class="absolute top-0 -left-12 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                           data-carousel-prev>
-                           <span
-                              class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                              <svg aria-hidden="true"
-                                 class="w-5 h-5 text-white font-black sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
-                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                                 </path>
-                              </svg>
-                              <span class="sr-only">Previous</span>
-                           </span>
-                        </button>
-                        <button type="button"
-                           class="absolute top-0 -right-8 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                           data-carousel-next>
-                           <span
-                              class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                              <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                                 </path>
-                              </svg>
-                              <span class="sr-only">Next</span>
-                           </span>
-                        </button>
-                     </div>
+                              <p class="text-xs line-clamp-1 text-ellipsis text-gray-400">{{ row.instructor.name }}</p>
+                              <div class="flex">
+                                 <span class="text-sm font-bold text-yellow-600">4.6</span>
+                                 <StarRating />
+                                 <span class="text-gray-400 text-xs ms-1">(499,666) </span>
+                              </div>
+                              <p class="mb-3 font-bold">₦ {{ row.price }} <span
+                                    class="line-through text-gray-400 text-sm font-normal ms-1">{{
+                                       row.inflated_price }}</span>
+                              </p>
+                           </div>
+                        </div>
+                        </Link>
+                     </template>
+                     <!-- Slider controls -->
+                     <button type="button"
+                        class="absolute top-0 -left-12 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        id="previousSlide" data-slide-previous>
+                        <span
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                           <svg aria-hidden="true" class="w-5 h-5 text-white font-black sm:w-6 sm:h-6 dark:text-gray-800"
+                              fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                              </path>
+                           </svg>
+                           <span class="sr-only">Previous</span>
+                        </span>
+                     </button>
+                     <button type="button"
+                        class="absolute top-0 -right-8 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none "
+                        id="nextSlide" data-slide-next>
+                        <span
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                           <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+                              stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                              </path>
+                           </svg>
+                           <span class="sr-only">Next</span>
+                        </span>
+                     </button>
                   </div>
+
                </div>
             </template>
          </div>
-         <div class="relative">
-            <div
-               class="slides-container h-72 flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0">
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1600"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/6263568/pexels-photo-6263568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/3026364/pexels-photo-3026364.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/10343729/pexels-photo-10343729.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/13860053/pexels-photo-13860053.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/8576739/pexels-photo-8576739.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/1743367/pexels-photo-1743367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/5920021/pexels-photo-5920021.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/12805075/pexels-photo-12805075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-               <div class="slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                     src="https://images.pexels.com/photos/547115/pexels-photo-547115.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                     alt="mountain_image" />
-               </div>
-            </div>
-
-            <div class="absolute top-0 -left-4 h-full items-center hidden md:flex">
-               <button role="button" class="prev px-2 py-2 rounded-full bg-neutral-100 text-neutral-900 group"
-                  aria-label="prev">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor"
-                     class="w-5 h-5 group-active:-translate-x-2 transition-all duration-200 ease-linear">
-                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                  </svg>
-               </button>
-            </div>
-            <div class="absolute top-0 -right-4 h-full items-center hidden md:flex">
-               <button role="button" class="next px-2 py-2 rounded-full bg-neutral-100 text-neutral-900 group"
-                  aria-label="next">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor"
-                     class="w-5 h-5 group-active:translate-x-2 transition-all duration-200 ease-linear">
-                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                  </svg>
-               </button>
-            </div>
-         </div>
-
-         <!--<div class="mb-1">
-            <ul class="flex flex-wrap -mb-px text-base font-bold text-center" data-tabs-toggle="#coursesTab"
-               role="tablist">
-               <li class="mr-2" role="presentation">
-                  <button class="inline-block p-4 text-gray-950 aria-selected:hover:text-gray-950" id="profile-tab"
-                     data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                     Profile
-                  </button>
-               </li>
-               <li class="mr-2" role="presentation">
-                  <button
-                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard"
-                     aria-selected="false">
-                     Dashboard
-                  </button>
-               </li>
-               <li class="mr-2" role="presentation">
-                  <button
-                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                     id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
-                     aria-selected="false">
-                     Settings
-                  </button>
-               </li>
-               <li role="presentation">
-                  <button
-                     class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                     id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts"
-                     aria-selected="false">
-                     Contacts
-                  </button>
-               </li>
-            </ul>
-         </div>
-         <div id="coursesTab" class="border border-stone-400">
-            <div class="hidden p-5" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-               <p class="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the
-                  <strong class="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                  Clicking another tab will toggle the visibility of this one for the next.
-                  The tab JavaScript swaps classes to control the content visibility and
-                  styling.
-               </p>
-            </div>
-            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel"
-               aria-labelledby="dashboard-tab">
-               <p class="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the
-                  <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>.
-                  Clicking another tab will toggle the visibility of this one for the next.
-                  The tab JavaScript swaps classes to control the content visibility and
-                  styling.
-               </p>
-            </div>
-            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel"
-               aria-labelledby="settings-tab">
-               <p class="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the
-                  <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>.
-                  Clicking another tab will toggle the visibility of this one for the next.
-                  The tab JavaScript swaps classes to control the content visibility and
-                  styling.
-               </p>
-            </div>
-            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel"
-               aria-labelledby="contacts-tab">
-               <p class="text-sm text-gray-500 dark:text-gray-400">
-                  This is some placeholder content the
-                  <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>.
-                  Clicking another tab will toggle the visibility of this one for the next.
-                  The tab JavaScript swaps classes to control the content visibility and
-                  styling.
-               </p>
-            </div>
-         </div>-->
       </section>
    </Layout>
 </template>
