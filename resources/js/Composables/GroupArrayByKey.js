@@ -12,13 +12,3 @@ export function useGroupArrayByKey(array, key) {
     return result;
   }, {});
 }
-
-
-// data.reduce((result, obj) => {
-//   const category = obj.category;
-//   if (!result[category]) {
-//     result[category] = [];
-//   }
-//   result[category].push(obj);
-//   return result;
-// }, {});
