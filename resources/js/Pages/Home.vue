@@ -115,7 +115,7 @@ const courseSubCategories = Object.values(
                             science, and machine learning. You’ll learn how to build everything from
                             games to sites to apps. Choose from a range of courses that will appeal to
                         </p>
-                        <Link class="my-5" type="button" href="#">
+                        <Link class="my-5" type="button" :href="row.link">
                         <Button1>Explore {{ row.title }}</Button1>
                         </Link>
                         <!-- Get only courses that belong to that subcategory-->
