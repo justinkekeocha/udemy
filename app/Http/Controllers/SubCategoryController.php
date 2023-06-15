@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubCategory;
-use App\Http\Requests\StoreSubCategoryRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateSubCategoryRequest;
 
 class SubCategoryController extends Controller
@@ -27,7 +27,7 @@ class SubCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSubCategoryRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +51,7 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
+    public function update(Request $request, SubCategory $subCategory)
     {
         //
     }

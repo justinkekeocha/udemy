@@ -1,12 +1,13 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Course;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\CourseResource;
+use App\Http\Controllers\CourseController;
 use App\Http\Resources\SubCategoryResource;
 use App\Http\Controllers\CategoryController;
-use App\Http\Resources\CourseResource;
-use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,6 @@ Route::prefix('/courses')->controller(CategoryController::class)->name('category
    Route::get('/{category}', 'show')->name('show');
 });
 
-
+Route::prefix('/course')->controller(CourseController::class)->name('courses.')->group(function () {
+   Route::get('/{course}', 'show')->name('show');
+});

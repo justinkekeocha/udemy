@@ -16,9 +16,11 @@ class SubCategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $title = fake()->unique()->word();
         return [
-            'title' => fake()->unique()->word(),
+            'title' => $title,
             'description' =>  fake()->text(),
+            'slug' => Str::slug($title, '-'),
         ];
     }
 }
