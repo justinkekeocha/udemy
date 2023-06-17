@@ -31,7 +31,16 @@ class DatabaseSeeder extends Seeder
 
       User::factory(10)->create();
 
-      Category::factory(8)->create();
+      Category::factory(8)->sequence(
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-development-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-marketing-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-it-and-software-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-personal-development-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-business-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-photography-v2.jpg'],
+         ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-music-v2.jpg'],
+      )->create();
 
       SubCategory::factory(24)
          ->sequence(fn (Sequence $sequence) => ['category_id' => Category::all()->random()])
