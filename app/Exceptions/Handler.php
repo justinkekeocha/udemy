@@ -27,8 +27,8 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             $stackTrace = $e->getTrace();
             (isset($stackTrace[1]['line'])) ? $stackTraceKey = 1 : $stackTraceKey = 2;
-            Log::error('['.$e->getCode().'] "'.$e->getMessage().'" on line '.$stackTrace[$stackTraceKey]['line'].' of file '.$stackTrace[$stackTraceKey]['file']);
-           
+            Log::error('[' . $e->getCode() . '] "' . $e->getMessage() . '" on line ' . $stackTrace[$stackTraceKey]['line'] . ' of file ' . $stackTrace[$stackTraceKey]['file']);
+
             return false;
         });
     }

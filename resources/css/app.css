@@ -20,6 +20,7 @@
 @layer base {
   html {
     font-family: UdemySans;
+    @apply antialiased;
   }
 
   h1 {
@@ -30,5 +31,9 @@
   }
   h3 {
     @apply text-2xl font-extrabold font-UdemySans mb-3;
+  }
+
+  hr {
+    @apply border-gray-300 my-5;
   }
 }

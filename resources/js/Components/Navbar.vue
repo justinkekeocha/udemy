@@ -36,8 +36,7 @@ watchEffect(async () => {
                             :data-dropdown-toggle="'subCategory' + row.id + 'Dropdown'"
                             data-dropdown-placement="right-start" data-dropdown-trigger="hover"
                             data-dropdown-offset-distance="15">
-                            <Link :href="route('category.show', [{ name: row.title }])"
-                                class="flex items-center justify-between">
+                            <Link :href="row.link" class="flex items-center justify-between">
                             {{ row.title }}
                             <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +56,7 @@ watchEffect(async () => {
                     class="z-50 hidden bg-white divide-y divide-gray-100 shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                         <li v-for="row in subCategory">
-                            <a href="#"
+                            <a :href="row.link"
                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{
                                     row.title }}
                             </a>
@@ -93,8 +92,12 @@ watchEffect(async () => {
         </div>
 
         <div class="flex gap-1">
+            <Link :href="route('login')">
             <Button1>Log in</Button1>
+            </Link>
+            <Link :href="route('login')">
             <Button1 class="!bg-black hover:bg-black text-white">Sign up</Button1>
+            </Link>
             <Button1 class="!p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 stroke-2">

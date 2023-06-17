@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
 
       User::factory(10)->create();
 
-      Category::factory(3)->create();
+      Category::factory(8)->create();
 
-      SubCategory::factory(12)
+      SubCategory::factory(24)
          ->sequence(fn (Sequence $sequence) => ['category_id' => Category::all()->random()])
          ->create();
 

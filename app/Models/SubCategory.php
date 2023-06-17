@@ -16,10 +16,12 @@ class SubCategory extends Model
     }
 
     //Relationships
+
     public function courses()
     {
         return $this->hasMany(Course::class);
     }
+
 
     //Attributes
 
