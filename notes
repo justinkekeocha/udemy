@@ -1,0 +1,21 @@
+//   https://stackabuse.com/sending-ajax-requests-in-vue-js/
+//   https://www.youtube.com/watch?v=gDMPgTFLOqc
+axios.get(route("category.index")).then((response) => {
+  // handle success
+  categories.value = response.data;
+});
+axios.get(route("sub-category.index")).then((response) => {
+  // handle success
+  //  subCategories.value = useGroupArrayByKey(
+  //    subCategoryStore.subCategories,
+  //    "category_id"
+  //  );
+  //console.log(subCategories.value);
+  setTimeout(() => {
+    //useGroupArrayByKey(toRaw(subCategoryStore.subCategories), "category_id");
+    // initDropdowns();
+  }, 1000 * 1);
+});
+
+//https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save'
+//https://codepen.io/disguy-droid/details/wvxrPEL
