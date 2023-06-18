@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, onBeforeMount } from 'vue'
 import Button1 from "../Components/Buttons/Button1.vue";
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import Slide from "../Components/Slide.vue"
@@ -7,13 +8,20 @@ import Card1 from "../Components/Cards/Card1.vue";
 
 
 const props = defineProps({
+    categories: Object,
     subCategories: Object,
     courses: Object,
 });
 
+//Get on the first subCategory
 const courseSubCategories = Object.values(
     useGroupArrayByKey(props.subCategories, "category_id")
-)[0];
+)[0]
+
+//Group courses according to subCategory
+const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_category_id');
+
+
 </script>
 
 <template>
@@ -121,7 +129,7 @@ const courseSubCategories = Object.values(
                         </Link>
                         <!-- Get only courses that belong to that subcategory-->
                         <Slide>
-                            <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
+                            <template v-for="(row, index) in groupCoursesbySubCategory[
                                 row.id
                             ]">
 
@@ -193,7 +201,7 @@ const courseSubCategories = Object.values(
             <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Students are viewing
             </h2>
             <Slide>
-                <template v-for="(row, index) in useGroupArrayByKey(courses, 'sub_category_id')[
+                <template v-for="(row, index) in groupCoursesbySubCategory[
                     1
                 ]">
 
@@ -225,13 +233,36 @@ const courseSubCategories = Object.values(
 
         <!--Categories section-->
         <section class="container mx-auto p-5 mb-12">
-             <div class="grid grid-cols-12 gap-1">
-                    <div class="col-span-12 md:col-span-3">Column 1</div>
-                    <div class="col-span-12 md:col-span-3">Column 2</div>
-                    <div class="col-span-12 md:col-span-3">Column 3</div>
+            <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Top categories
+            </h2>
+            <div class="grid grid-cols-12 gap-5">
+                <template v-for="row in categories">
+                    <div class="col-span-12 md:col-span-3">
+                        <Link :href="row.link">
+                        <div class=" bg-white ">
+                            <img class="w-full transition ease-in-out hover:scale-105 duration-300" :src="row.image"
+                                alt="" />
+                        </div>
+                        <p class="mt-5 font-black">{{ row.title }}</p>
+                        </Link>
+                    </div>
+                </template>
             </div>
         </section>
 
+        <section class="py-14 px-10 bg-slate-50">
+            <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Featured topics by
+                category
+            </h2>
+            <div class="grid grid-cols-12 gap-5">
+                <template v-for="row in categories.slice(0, 4)">
+                    <div class="col-span-12 md:col-span-3">
+                        <h3 class="text-xl">{{ row.title }}</h3>
+                    </div>
+                </template>
+            </div>
+
+        </section>
 
     </Layout>
 </template>

@@ -10,6 +10,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Resources\SubCategoryResource;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +27,10 @@ use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {
    //$subCategories = SubCategoryResource::collection(SubCategory::all()->where('category_id', 1));
+   $categories = CategoryResource::collection(Category::all());
    $subCategories = SubCategoryResource::collection(SubCategory::all());
    $courses =  CourseResource::collection(Course::all());
-   return Inertia::render("Home", compact('subCategories', 'courses'));
+   return Inertia::render("Home", compact('categories', 'subCategories', 'courses'));
 })->name('home');
 
 Route::prefix('/courses/{category}')->controller(CategoryController::class)->name('category.')->group(function () {

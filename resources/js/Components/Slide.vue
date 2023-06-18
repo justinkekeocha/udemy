@@ -47,7 +47,7 @@ onMounted(() => {
                 </span>
             </button>
             <button type="button"
-                class="absolute top-0 -right-8 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none "
+                class="absolute top-0 -right-10 z-10 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none "
                 id="nextSlide" data-slide-next>
                 <span
                     class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">

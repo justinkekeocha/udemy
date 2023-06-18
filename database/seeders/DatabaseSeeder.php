@@ -42,11 +42,11 @@ class DatabaseSeeder extends Seeder
          ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-music-v2.jpg'],
       )->create();
 
-      SubCategory::factory(24)
+      SubCategory::factory(32)
          ->sequence(fn (Sequence $sequence) => ['category_id' => Category::all()->random()])
          ->create();
 
-      Course::factory(240)
+      Course::factory(340)
          ->sequence(fn (Sequence $sequence) => ['sub_category_id' => SubCategory::all()->random()])
          ->sequence(fn (Sequence $sequence) => ['instructor_id' => User::all()->random()])
          ->sequence(
