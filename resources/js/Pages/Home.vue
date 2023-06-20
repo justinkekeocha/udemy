@@ -337,7 +337,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                                             alt="Rounded avatar">
                                         <p class="font-black text-xl">Jim Hemgen</p>
                                         <p class=" text-neutral-500 mb-4">Principal</p>
-                                        <p>Booz Allen Hamilton</p>
+                                        <p>Booz Allexkgnfkgn Hamilton</p>
                                     </div>
 
                                 </div>
