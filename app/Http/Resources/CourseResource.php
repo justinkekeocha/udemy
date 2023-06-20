@@ -25,6 +25,7 @@ class CourseResource extends JsonResource
             'inflated_price' => number_format($this->price * 13),
             'link' => $this->link,
             'sub_category_id' => $this->sub_category_id,
+            'category_id' => $this->category->id,
             'category' => new CategoryResource($this->category),
             'subCategory' => new SubCategoryResource($this->subCategory),
             'instructor' => new UserResource($this->instructor),

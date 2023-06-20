@@ -19,7 +19,7 @@ class SubCategoryFactory extends Factory
     {
         $title = fake()->unique()->word();
         return [
-            'title' => $title,
+            'title' => ucfirst($title),
             'description' =>  fake()->text(),
             'slug' => Str::slug($title, '-'),
         ];

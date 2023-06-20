@@ -3,8 +3,11 @@ import { onMounted, onBeforeMount } from 'vue'
 import Button1 from "../Components/Buttons/Button1.vue";
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import Slide from "../Components/Slide.vue"
+import CarouselControls from '../Components/Buttons/CarouselControls.vue'
 import StarRating from "../Components/StarRating.vue";
 import Card1 from "../Components/Cards/Card1.vue";
+import { Link } from '@inertiajs/vue3';
+import Carousel from '../Components/Carousel.vue';
 
 
 const props = defineProps({
@@ -14,12 +17,18 @@ const props = defineProps({
 });
 
 //Get on the first subCategory
-const courseSubCategories = Object.values(
-    useGroupArrayByKey(props.subCategories, "category_id")
-)[0]
+// const courseSubCategories = Object.values(
+//     useGroupArrayByKey(props.subCategories, "category_id")
+// )[0]
+
+// console.log(useGroupArrayByKey(props.subCategories, "category_id"))
+
+//Group subCategories according to category_id
+const groupSubcategories = useGroupArrayByKey(props.subCategories, "category_id")
 
 //Group courses according to subCategory
 const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_category_id');
+
 
 
 </script>
@@ -27,67 +36,66 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
 <template>
     <Layout :title="'Online Courses - Learn Anything, On Your Schedule | ' + $page.props.appName" description="hello">
         <section>
-            <div id="animation-carousel" class="relative w-full" data-carousel="static">
-                <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                    <!-- Item 1 -->
-                    <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                        <div>
-                            <img src="../../../public/assets/img/carousel-1.jpg"
-                                class="block w-full object-cover object-center" alt="..." />
-                        </div>
-                        <div class="absolute w-[28rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
-                            <h1 class="text-3xl font-black font-SuisseWorks mb-3">
-                                Learning that gets you
-                            </h1>
-                            <p class="text-lg">
-                                Skills for your present (and your future). Get started with us.
-                            </p>
-                        </div>
+            <Carousel>
+                <!-- Item 1 -->
+                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                    <div>
+                        <img src="../../../public/assets/img/carousel-1.jpg" class="block w-full object-cover object-center"
+                            alt="..." />
                     </div>
-                    <!-- Item 2 -->
-                    <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                        <img src="../../../public/assets/img/carousel-2.jpg"
-                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
-                        <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
-                            <h1 class="text-3xl font-black font-SuisseWorks mb-3">
-                                Unlock the power of your people
-                            </h1>
-                            <p class="text-base mb-3">
-                                Udemy Business is trusted by 12.5K+ companies around the world. Find out
-                                what we can do for yours.
-                            </p>
-                            <Button1 class="!bg-black hover:bg-black text-white">Request a demo</Button1>
-                        </div>
+                    <div class="absolute w-[28rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        <h1 class="text-3xl font-black font-SuisseWorks mb-3">
+                            Learning that gets you
+                        </h1>
+                        <p class="text-lg">
+                            Skills for your present (and your future). Get started with us.
+                        </p>
                     </div>
                 </div>
-                <!-- Slider controls -->
-                <button type="button"
-                    class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-prev>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg aria-hidden="true" class="w-5 h-5 text-white font-black sm:w-6 sm:h-6 dark:text-gray-800"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                            </path>
-                        </svg>
-                        <span class="sr-only">Previous</span>
-                    </span>
-                </button>
-                <button type="button"
-                    class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-next>
-                    <span
-                        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                        <span class="sr-only">Next</span>
-                    </span>
-                </button>
-            </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                    <img src="../../../public/assets/img/carousel-2.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                    <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        <h1 class="text-3xl font-black font-SuisseWorks mb-3">
+                            Unlock the power of your people
+                        </h1>
+                        <p class="text-base mb-3">
+                            Udemy Business is trusted by 12.5K+ companies around the world. Find out
+                            what we can do for yours.
+                        </p>
+                        <Button1 class="!bg-black hover:bg-black text-white">Request a demo</Button1>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                    <img src="../../../public/assets/img/carousel-3.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                    <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        <h1 class="text-3xl font-black font-SuisseWorks mb-3">
+                            New to Udemy? Lucky you.
+                        </h1>
+                        <p class="text-base mb-3">
+                            Enjoy new-learner savings with courses starting at ₦3,500 for a very limited time.
+                        </p>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                    <img src="../../../public/assets/img/carousel-4.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                    <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        <h1 class="text-3xl font-black font-SuisseWorks mb-3">
+                            Build ready-for-anything teams
+                        </h1>
+                        <p class="text-base mb-3">
+                            See why leading organizations choose to learn with Udemy Business.
+                        </p>
+                        <Button1 class="!bg-black hover:bg-black text-white">Request a demo</Button1>
+                    </div>
+                </div>
+            </Carousel>
+
         </section>
 
         <section class="p-5 mb-5">
@@ -101,7 +109,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             <div class="mb-1">
                 <ul class="flex flex-wrap -mb-px text-base font-bold text-center" data-tabs-toggle="#coursesTab"
                     role="tablist">
-                    <li class="mr-2" role="presentation" v-for="(row, index) in courseSubCategories" :key="index">
+                    <li class="mr-2" role="presentation" v-for="(row, index) in groupSubcategories[1]" :key="index">
                         <button :class="{
                             'inline-block p-4 text-gray-500 aria-selected:text-gray-950': true,
                         }" :data-tabs-target="'#' + row.title + '-tab'" type="button" role="tab">
@@ -112,7 +120,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </div>
             <div id="coursesTab" class="border border-stone-400">
                 <!-- Loop through subcategories-->
-                <template v-for="(row, index) in courseSubCategories">
+                <template v-for="(row, index) in groupSubcategories[1]">
                     <div class="hidden p-10" :id="row.title + '-tab'" role="tabpanel">
                         <h2 class="font-UdemySans text-2xl tracking-tight">
                             Expand your career opportunities with {{ row.title }}
@@ -240,8 +248,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                     <div class="col-span-12 md:col-span-3">
                         <Link :href="row.link">
                         <div class=" bg-white ">
-                            <img class="w-full transition ease-in-out hover:scale-105 duration-300" :src="row.image"
-                                alt="" />
+                            <img class="w-full transition ease-in-out hover:scale-105 duration-150" :src="row.image" />
                         </div>
                         <p class="mt-5 font-black">{{ row.title }}</p>
                         </Link>
@@ -254,15 +261,98 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Featured topics by
                 category
             </h2>
-            <div class="grid grid-cols-12 gap-5">
-                <template v-for="row in categories.slice(0, 4)">
-                    <div class="col-span-12 md:col-span-3">
-                        <h3 class="text-xl">{{ row.title }}</h3>
-                    </div>
-                </template>
+            <div class="container mx-auto">
+                <div class="grid grid-cols-12 gap-5 mb-3">
+                    <template v-for="row in categories.slice(0, 4)">
+                        <div class="col-span-12 md:col-span-3">
+                            <h3 class="text-xl">{{ row.title }}</h3>
+                            <template v-for="row in groupSubcategories[row.id].slice(0, 2)">
+                                <Link :href="row.link">
+                                <p class="underline font-bold  text-violet-700 mb-1">{{ row.title }}</p>
+                                </Link>
+                                <p class="text-sm text-neutral-500 mb-5">7,070,015 students</p>
+                            </template>
+                        </div>
+                    </template>
+                </div>
             </div>
-
+            <Link type="button" href="#">
+            <Button1>Explore more topics</Button1>
+            </Link>
         </section>
+
+        <section class="p-12">
+            <h2 class="text-2xl leading-5 tracking-tight text-center mb-2">Trusted by over 13,400 great teams
+            </h2>
+            <p class="text-center mb-5">Leading companies use the same courses to help employees keep their skills fresh.
+            </p>
+            <div class="grid grid-cols-12 gap-5 mb-3">
+                <div class="col-span-6 md:col-span-2">
+                    <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg">
+                </div>
+                <div class="col-span-6 md:col-span-2">
+                    <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg">
+                </div>
+                <div class="col-span-6 md:col-span-2">
+                    <img src="https://s.udemycdn.com/partner-logos/v4/box-dark.svg">
+                </div>
+                <div class="col-span-6 md:col-span-2">
+                    <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg">
+                </div>
+                <div class="col-span-6 md:col-span-2">
+                    <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg">
+                </div>
+                <div class="col-span-6 md:col-span-2">
+                    <img src="https://s.udemycdn.com/partner-logos/v4/tcs-dark.svg">
+                </div>
+            </div>
+        </section>
+
+        <section class="p-0 md:py-16 md:px-56 bg-slate-50">
+            <Carousel>
+                <template v-for="n in 8">
+                    <Card1 class="duration-1000 ease-in-out" data-carousel-item>
+                        <div class="container mx-auto">
+                            <div class="grid grid-cols-12 gap-5 mb-3 h-full">
+                                <div class="col-span-12 md:col-span-6">
+                                    <img class="mb-5"
+                                        src="https://s.udemycdn.com/browse_components/student-quote-unit/quote.svg"
+                                        width="17.78" height="16">
+                                    <p class="mb-16">Thanks to Udemy Business, Booz Allen has armed our workforce,
+                                        specifically
+                                        its<span class="font-extrabold"> data scientists, with highly relevant and in-demand
+                                            tech
+                                            skills</span> that are enabling consultants to stay ahead of big data trends and
+                                        raise
+                                        the bar on proficiency, skills, and competencies to meet client demand.</p>
+
+                                    <Link href="#">
+                                    <p class="underline font-extrabold  text-violet-700 mb-1">Read full story</p>
+                                    </Link>
+                                </div>
+                                <div class="col-span-12 md:col-span-6">
+                                    <div class="flex flex-col items-center">
+                                        <img class="w-36 h-36 rounded-full mb-10"
+                                            src="https://s.udemycdn.com/home/ub-case-studies/James_Hemgen.jpeg"
+                                            alt="Rounded avatar">
+                                        <p class="font-black text-xl">Jim Hemgen</p>
+                                        <p class=" text-neutral-500 mb-4">Principal</p>
+                                        <p>Booz Allen Hamilton</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </Card1>
+                </template>
+                <template v-slot:carousel-controls>
+                    <CarouselControls previousControlCustom="-left-9" nextControlCustom="-right-9"></CarouselControls>
+                </template>
+            </Carousel>
+        </section>
+
+
+
 
     </Layout>
 </template>

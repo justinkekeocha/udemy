@@ -2,6 +2,7 @@
 export function useGroupArrayByKey(array, key) {
   return array.reduce((result, obj) => {
     const keyValue = obj[key];
+    //console.log(keyValue.id);
 
     if (!result[keyValue]) {
       result[keyValue] = [];
