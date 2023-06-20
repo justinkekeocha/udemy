@@ -4,7 +4,8 @@ import CarouselControls from "../Components/Buttons/CarouselControls.vue";
 <template>
     <div class="relative w-full" data-carousel="static">
         <!-- Carousel wrapper -->
-        <div class="relative h-56 md:h-96 overflow-hidden ">
+        <!--h-56 md:h-96-->
+        <div class="relative h-[40rem] md:h-96 overflow-hidden ">
             <!--Items-->
             <slot></slot>
         </div>

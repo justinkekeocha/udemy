@@ -1,7 +1,6 @@
 <script setup>
 import { watchEffect } from "vue";
-import Button1 from "/resources/js/Components/Buttons/Button1.vue";
-import Popover from "/resources/js/Components/Popover.vue";
+import Popover from "../Components/Popover.vue";
 import { initDropdowns } from "flowbite";
 import { useCategoryStore } from "../Stores/CategoryStore";
 import { useSubCategoryStore } from "../Stores/SubCategoryStore";
@@ -96,7 +95,7 @@ watchEffect(async () => {
             <Button1>Log in</Button1>
             </Link>
             <Link :href="route('login')">
-            <Button1 class="!bg-black hover:bg-black text-white">Sign up</Button1>
+            <Button2>Sign up</Button2>
             </Link>
             <Button1 class="!p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

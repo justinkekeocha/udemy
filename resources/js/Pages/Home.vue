@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, onBeforeMount } from 'vue'
-import Button1 from "../Components/Buttons/Button1.vue";
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import Slide from "../Components/Slide.vue"
 import CarouselControls from '../Components/Buttons/CarouselControls.vue'
@@ -64,7 +63,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                             Udemy Business is trusted by 12.5K+ companies around the world. Find out
                             what we can do for yours.
                         </p>
-                        <Button1 class="!bg-black hover:bg-black text-white">Request a demo</Button1>
+                        <Button2>Request a demo</Button2>
                     </div>
                 </div>
                 <!-- Item 3 -->
@@ -91,7 +90,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                         <p class="text-base mb-3">
                             See why leading organizations choose to learn with Udemy Business.
                         </p>
-                        <Button1 class="!bg-black hover:bg-black text-white">Request a demo</Button1>
+                        <Button2>Request a demo</Button2>
                     </div>
                 </div>
             </Carousel>
@@ -191,7 +190,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                             A
                         </p>
                         <hr>
-                        <div class="flex font-black text-violet-700 ">
+                        <div class="flex font-black text-violet-800 ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="w-12 h-12 me-2">
                                 <path fill-rule="evenodd"
@@ -268,7 +267,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                             <h3 class="text-xl">{{ row.title }}</h3>
                             <template v-for="row in groupSubcategories[row.id].slice(0, 2)">
                                 <Link :href="row.link">
-                                <p class="underline font-bold  text-violet-700 mb-1">{{ row.title }}</p>
+                                <p class="underline font-bold  text-violet-800 mb-1">{{ row.title }}</p>
                                 </Link>
                                 <p class="text-sm text-neutral-500 mb-5">7,070,015 students</p>
                             </template>
@@ -309,7 +308,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         </section>
 
         <section class="p-0 md:py-16 md:px-56 bg-slate-50">
-            <Carousel>
+            <Carousel class="mb-14">
                 <template v-for="n in 8">
                     <Card1 class="duration-1000 ease-in-out" data-carousel-item>
                         <div class="container mx-auto">
@@ -318,37 +317,91 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                                     <img class="mb-5"
                                         src="https://s.udemycdn.com/browse_components/student-quote-unit/quote.svg"
                                         width="17.78" height="16">
-                                    <p class="mb-16">Thanks to Udemy Business, Booz Allen has armed our workforce,
+                                    <p>Thanks to Udemy Business, Booz Allen has armed our workforce,
                                         specifically
                                         its<span class="font-extrabold"> data scientists, with highly relevant and in-demand
                                             tech
                                             skills</span> that are enabling consultants to stay ahead of big data trends and
                                         raise
                                         the bar on proficiency, skills, and competencies to meet client demand.</p>
-
-                                    <Link href="#">
-                                    <p class="underline font-extrabold  text-violet-700 mb-1">Read full story</p>
-                                    </Link>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
-                                    <div class="flex flex-col items-center">
+                                    <div class="flex flex-col md:items-center mb-10 md:mb-0">
                                         <img class="w-36 h-36 rounded-full mb-10"
                                             src="https://s.udemycdn.com/home/ub-case-studies/James_Hemgen.jpeg"
                                             alt="Rounded avatar">
                                         <p class="font-black text-xl">Jim Hemgen</p>
                                         <p class=" text-neutral-500 mb-4">Principal</p>
-                                        <p>Booz Allexkgnfkgn Hamilton</p>
+                                        <p>Booz Allen Hamilton</p>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+                        <Link href="#">
+                        <p class="underline font-extrabold text-violet-800 ">Read full story</p>
+                        </Link>
                     </Card1>
                 </template>
                 <template v-slot:carousel-controls>
                     <CarouselControls previousControlCustom="-left-9" nextControlCustom="-right-9"></CarouselControls>
                 </template>
             </Carousel>
+            <Link href="#">
+            <div class="flex justify-center">
+                <p class="font-extrabold text-violet-800">View more customer stories
+                </p>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="w-4 h-6 text-violet-800">
+                    <path fill-rule="evenodd"
+                        d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            </Link>
+        </section>
+
+        <section class="p-0 md:py-16 md:px-44">
+            <div class="container mx-auto">
+
+                <div class="grid grid-cols-12 gap-5 mb-20">
+                    <div class="col-span-12 md:col-span-6">
+                        <img class="mb-5" src="../../../public/assets/img/logo-ub.svg" width="192" height="32">
+                        <h3 class="font-SuisseWorks text-4xl mb-5">Upskill your team with Udemy Business</h3>
+                        <ul class="list-disc list-outside text-xl grid gap-y-2 ms-5 mb-5">
+                            <li>Unlimited access to 22,000+ top Udemy courses, anytime, anywhere</li>
+                            <li>International course collection in 14 languages</li>
+                            <li>Top certifications in tech and business</li>
+                        </ul>
+                        <div class="flex">
+                            <Button2 class="text-lg font-black">Get {{ $page.props.appName }} Business</Button2>
+                            <Button1 class="text-lg font-black">Learn more</Button1>
+                        </div>
+                    </div>
+                    <div class="col-span-12 md:col-span-6">
+                        <div class="ms-0 md:ms-16">
+                            <img src="../../../public/assets/img/UB_Promo_1200x1200.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-5 mb-20">
+                    <div class="col-span-12 md:col-span-6">
+                        <img src="../../../public/assets/img/instructor-2x-v3.jpg">
+                    </div>
+                    <div class="col-span-12 md:col-span-6">
+                        <div class="ms-0 md:ms-16 mt-28">
+                            <h3 class="font-SuisseWorks text-3xl mb-5">Become an instructor</h3>
+                            <p class="mb-5 text-lg">Instructors from around the world teach millions of students on Udemy.
+                                We
+                                provide the tools
+                                and skills to teach what you love.</p>
+                            <Button2 class="text-lg font-black">Start teaching today</Button2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
 
