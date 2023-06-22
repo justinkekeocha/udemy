@@ -10,6 +10,6 @@ defineProps(['target'])
          <slot>
          </slot>
       </div>
-      <div data-popper-arrow></div>
+      <!--<div data-popper-arrow></div>-->
    </div>
 </template>
