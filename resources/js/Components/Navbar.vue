@@ -23,7 +23,7 @@ watchEffect(async () => {
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
 
             <button data-collapse-toggle="navbar-cta" type="button"
-                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-0 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="navbar-cta" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -40,8 +40,8 @@ watchEffect(async () => {
                     :alt="$page.props.appName + ' Logo'" />
                 </Link>
             </div>
-
-            <div class="md:flex md:flex-row items-center text-sm justify-between hidden w-full md:w-auto md:gap-x-5 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
+            <!--md:gap-x-5-->
+            <div class="flex hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
                 id="navbar-cta">
                 <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-placement="bottom">
                     Categories
@@ -84,7 +84,7 @@ watchEffect(async () => {
                 </template>
 
 
-                <div class="relative h-[3.0rem] grow">
+                <div class="relative h-[3.0rem] grow order-1 md:order-none w-full md:w-auto">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -97,19 +97,19 @@ watchEffect(async () => {
                         placeholder="Search for anything" required />
                 </div>
 
-                <div class="flex flex-col md:flex-row md:items-center md:gap-x-5 ">
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
                     <Link href="/">{{ $page.props.appName }} Business</Link>
                     <Link href="/">Teach on {{ $page.props.appName }}</Link>
                 </div>
 
-                <div class="flex flex-col md:flex-row md:items-center gap-1">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-1 w-full md:w-auto ">
                     <Link :href="route('login')">
-                    <Button1 class="!mb-0">Log in</Button1>
+                    <Button1 class="!mb-0 w-full md:w-auto">Log in</Button1>
                     </Link>
                     <Link :href="route('login')">
-                    <Button2 class="!mb-0">Sign up</Button2>
+                    <Button2 class="!mb-0  w-full md:w-auto">Sign up</Button2>
                     </Link>
-                    <Button1 class="hidden md:block  !p-2 !mb-0">
+                    <Button1 class="hidden md:block !p-2 !mb-0 ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 stroke-2">
                             <path stroke-linecap="round" stroke-linejoin="round"
