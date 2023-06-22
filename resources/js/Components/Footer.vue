@@ -78,8 +78,7 @@
         </div>
         <div class="flex justify-between py-8 text-sm">
             <Link href="#">
-            <img src="../../../public/assets/img/logo-udemy-inverted.svg" class="h-8"
-                :alt="$page.props.appName + ' Logo'" />
+            <img src="../../../public/assets/img/logo-udemy-inverted.svg" class="h-8" />
             </Link>
             <span class="text-xs">© 2023 Udemy, Inc.</span>
         </div>
