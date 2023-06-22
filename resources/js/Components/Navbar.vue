@@ -43,10 +43,11 @@ watchEffect(async () => {
             <!--md:gap-x-5-->
             <div class="flex hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
                 id="navbar-cta">
-                <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-placement="bottom">
+                <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-offset="25"
+                    data-popover-placement="bottom">
                     Categories
                 </button>
-                <Popover target="categories" class="z-50">
+                <Popover target="categories" class="text-sm text-gray-500">
                     <ul
                         class="font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <template v-for="row in categoryStore.categories">
@@ -98,8 +99,27 @@ watchEffect(async () => {
                 </div>
 
                 <div class="flex flex-col md:flex-row md:items-center gap-4">
-                    <Link href="/">{{ $page.props.appName }} Business</Link>
-                    <Link href="/">Teach on {{ $page.props.appName }}</Link>
+                    <Link href="/" data-popover-target="udemyBusinessPopover" data-popover-offset="25"
+                        data-popover-placement="bottom">{{
+                            $page.props.appName
+                        }} Business</Link>
+                    <Link href="/" data-popover-target="teachPopover" data-popover-offset="25"
+                        data-popover-placement="bottom">Teach on {{ $page.props.appName }}</Link>
+                    <!--Popovers-->
+                    <Popover target="udemyBusinessPopover" class="max-w-xs text-xl p-2 font-extrabold">
+                        <p class="mb-5">Get your team access to over 22,000 top Udemy courses, anytime, anywhere.
+                        </p>
+                        <Link href="#">
+                        <Button2 class="!mb-0 w-full">Try Udemy Business</Button2>
+                        </Link>
+                    </Popover>
+                    <Popover target="teachPopover" class="max-w-xs text-xl p-2 font-extrabold">
+                        <p class="mb-5">Turn what you know into an opportunity and reach millions around the world.
+                        </p>
+                        <Link href="#">
+                        <Button2 class="!mb-0 w-full">Learn more</Button2>
+                        </Link>
+                    </Popover>
                 </div>
 
                 <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-1 w-full md:w-auto ">
@@ -120,13 +140,17 @@ watchEffect(async () => {
             </div>
 
             <div class="md:mx-3">
-                <Link href="/">
+                <Link href="/" data-popover-target="cartPopover" data-popover-offset="25" data-popover-placement="bottom">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="w-6 h-6 stroke-2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                 </svg>
                 </Link>
+                <Popover target="cartPopover" class="py-5 px-16 text-center text-sm">
+                    <p class="text-neutral-500  mb-5">Your cart is empty.</p>
+                    <p class="text-violet-800 font-extrabold">Keep shopping</p>
+                </Popover>
             </div>
         </div>
     </nav>
