@@ -11,12 +11,126 @@ categoryStore.getCategories();
 const subCategoryStore = useSubCategoryStore();
 watchEffect(async () => {
     await subCategoryStore.getSubCategories();
-    initDropdowns();
+    setTimeout(() => {
+        initDropdowns();
+    }, 1000)
+
 });
 </script>
 
 <template>
-    <nav class="flex flex-row flex-wrap gap-x-5 p-1 bg-white border-gray-200 dark:bg-gray-900 shadow-md items-center">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
+
+            <button data-collapse-toggle="navbar-cta" type="button"
+                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-cta" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between p-4">
+                <Link href="/" class="flex items-center">
+                <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" class="h-8"
+                    :alt="$page.props.appName + ' Logo'" />
+                </Link>
+            </div>
+
+            <div class="md:flex md:flex-row items-center text-sm justify-between hidden w-full md:w-auto md:gap-x-5 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
+                id="navbar-cta">
+                <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-placement="bottom">
+                    Categories
+                </button>
+                <Popover target="categories" class="z-50">
+                    <ul
+                        class="font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <template v-for="row in categoryStore.categories">
+                            <li class="w-full px-4 py-2 hover:text-purple-600"
+                                :data-dropdown-toggle="'subCategory' + row.id + 'Dropdown'"
+                                data-dropdown-placement="right-start" data-dropdown-trigger="hover"
+                                data-dropdown-offset-distance="15">
+                                <Link :href="row.link" class="flex items-center justify-between">
+                                {{ row.title }}
+                                <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                </Link>
+                            </li>
+                        </template>
+                    </ul>
+                </Popover>
+
+                <template v-if="subCategoryStore.groupedSubCategories"
+                    v-for="(subCategory, index) in subCategoryStore.groupedSubCategories">
+                    <div :id="'subCategory' + index + 'Dropdown'"
+                        class="z-50 hidden bg-white divide-y divide-gray-100 shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2  text-gray-700 dark:text-gray-200">
+                            <li v-for="row in subCategory">
+                                <a :href="row.link"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{
+                                        row.title }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </template>
+
+
+                <div class="relative h-[3.0rem] grow">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input type="search" id="default-search"
+                        class="block h-full w-full p-0 pl-12  text-gray-900 border-stone-900 focus:border-stone-900 focus:ring-0 bg-gray-50 rounded-full"
+                        placeholder="Search for anything" required />
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-center md:gap-x-5 ">
+                    <Link href="/">{{ $page.props.appName }} Business</Link>
+                    <Link href="/">Teach on {{ $page.props.appName }}</Link>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-center gap-1">
+                    <Link :href="route('login')">
+                    <Button1 class="!mb-0">Log in</Button1>
+                    </Link>
+                    <Link :href="route('login')">
+                    <Button2 class="!mb-0">Sign up</Button2>
+                    </Link>
+                    <Button1 class="hidden md:block  !p-2 !mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 stroke-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                        </svg>
+                    </Button1>
+                </div>
+            </div>
+
+            <div class="md:mx-3">
+                <Link href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-6 h-6 stroke-2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg>
+                </Link>
+            </div>
+        </div>
+    </nav>
+    <!--<nav class="flex flex-row flex-wrap gap-x-5 p-1 bg-white border-gray-200 dark:bg-gray-900 shadow-md items-center">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between p-4">
             <Link href="/" class="flex items-center">
             <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" class="h-8"
@@ -97,15 +211,12 @@ watchEffect(async () => {
             <Link :href="route('login')">
             <Button2>Sign up</Button2>
             </Link>
-            <Button1 class="!p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6 stroke-2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                </svg>
-            </Button1>
-        </div>
-    </nav>
+        <Button1 class="!p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 stroke-2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+        </Button1>
+    </div>-->
 </template>
-
-v-
