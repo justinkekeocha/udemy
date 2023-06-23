@@ -5,13 +5,13 @@ import CarouselControls from "../Components/Buttons/CarouselControls.vue";
     <div class="relative w-full" data-carousel="static">
         <!-- Carousel wrapper -->
         <!--h-56 md:h-96-->
-        <div class="relative h-[40rem] md:h-96 overflow-hidden ">
+        <div class="relative h-[26rem] overflow-hidden ">
             <!--Items-->
             <slot></slot>
         </div>
         <!-- Carousel controls -->
         <slot name="carousel-controls">
-            <CarouselControls previousControlCustom="top-10"></CarouselControls>
+            <CarouselControls></CarouselControls>
         </slot>
     </div>
 </template>
