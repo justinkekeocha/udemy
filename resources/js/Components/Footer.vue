@@ -62,7 +62,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-span-12 md:col-span-3 md:justify-self-end">
+                <div class="col-span-12 md:col-span-3 md:justify-self-end order-first md:order-none">
                     <button class="border border-white min-w-[9rem] px-3 py-2 text-base">
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-between py-8 text-sm">
+        <div class="flex justify-between py-8 text-sm ">
             <Link href="#">
             <img src="../../../public/assets/img/logo-udemy-inverted.svg" class="h-8" />
             </Link>
