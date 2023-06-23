@@ -30,7 +30,11 @@ onMounted(() => {
 <!-- https://codepen.io/disguy-droid/details/wvxrPEL -->
 <template>
     <div class="relative">
-        <div class="slides-container flex snap-x snap-mandatory overflow-hidden space-x-2 scroll-smooth overflow-x-hidden"
+        <!--slides-container h-72 flex snap-x snap-mandatory overflow-hidden overflow-x-auto space-x-2 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0
+        slides-container flex snap-x snap-mandatory overflow-hidden space-x-2 scroll-smooth overflow-x-hidden
+        
+        -->
+        <div class="slides-container flex snap-x snap-mandatory space-x-2 scroll-smooth overflow-x-auto"
             data-slide-container>
             <slot></slot>
             <!-- Slider controls -->
@@ -40,3 +44,22 @@ onMounted(() => {
         </div>
     </div>
 </template>
+
+<style>
+slides-container {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.slides-container::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+</style>
+<style scoped>
+/*:slotted(div) {
+    @apply w-auto;
+}*/
+</style> 
