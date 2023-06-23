@@ -39,10 +39,11 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 <!-- Item 1 -->
                 <div class="hidden duration-1000 ease-in-out" data-carousel-item>
                     <div>
-                        <img src="../../../public/assets/img/carousel-1.jpg" class="block w-full object-cover object-center"
-                            alt="..." />
+                        <img src="../../../public/assets/img/carousel-1.jpg"
+                            class="h-44 w-full md:h-full object-cover object-center" alt="..." />
                     </div>
-                    <div class="absolute w-[28rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                    <div
+                        class="relative md:absolute md:w-[28rem] md:top-14 md:left-20 bg-white p-8 md:shadow-[0px_2px_4px_0px_#00000024]">
                         <h1 class="text-3xl font-black font-SuisseWorks mb-3">
                             Learning that gets you
                         </h1>
@@ -54,8 +55,9 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 <!-- Item 2 -->
                 <div class="hidden duration-1000 ease-in-out" data-carousel-item>
                     <img src="../../../public/assets/img/carousel-2.jpg"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
-                    <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        class="h-44 w-full md:h-full object-cover object-center" alt="..." />
+                    <div
+                        class="relative md:absolute md:w-[28rem] md:top-14 md:left-20 bg-white p-8 md:shadow-[0px_2px_4px_0px_#00000024]">
                         <h1 class="text-3xl font-black font-SuisseWorks mb-3">
                             Unlock the power of your people
                         </h1>
@@ -69,8 +71,9 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 <!-- Item 3 -->
                 <div class="hidden duration-1000 ease-in-out" data-carousel-item>
                     <img src="../../../public/assets/img/carousel-3.jpg"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
-                    <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        class="h-44 w-full md:h-full object-cover object-center" alt="..." />
+                    <div
+                        class="relative md:absolute md:w-[28rem] md:top-14 md:left-20 bg-white p-8 md:shadow-[0px_2px_4px_0px_#00000024]">
                         <h1 class="text-3xl font-black font-SuisseWorks mb-3">
                             New to Udemy? Lucky you.
                         </h1>
@@ -82,8 +85,9 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 <!-- Item 4 -->
                 <div class="hidden duration-1000 ease-in-out" data-carousel-item>
                     <img src="../../../public/assets/img/carousel-4.jpg"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
-                    <div class="absolute w-[30rem] bg-white top-14 left-20 p-8 shadow-[0px_2px_4px_0px_#00000024]">
+                        class="h-44 w-full md:h-full object-cover object-center" alt="..." />
+                    <div
+                        class="relative md:absolute md:w-[28rem] md:top-14 md:left-20 bg-white p-8 md:shadow-[0px_2px_4px_0px_#00000024]">
                         <h1 class="text-3xl font-black font-SuisseWorks mb-3">
                             Build ready-for-anything teams
                         </h1>
@@ -120,7 +124,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             <div id="coursesTab" class="border border-stone-400">
                 <!-- Loop through subcategories-->
                 <template v-for="(row, index) in groupSubcategories[1]">
-                    <div class="hidden p-10" :id="row.title + '-tab'" role="tabpanel">
+                    <div class="hidden p-3 md:p-10" :id="row.title + '-tab'" role="tabpanel">
                         <h2 class="font-UdemySans text-2xl tracking-tight">
                             Expand your career opportunities with {{ row.title }}
                         </h2>
@@ -169,7 +173,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </div>
         </section>
 
-        <section class="py-14 px-10 bg-slate-50">
+        <section class="px-5 md:px-10 py-14 bg-slate-50">
             <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">How learners like you are achieving their
                 goals
             </h2>
