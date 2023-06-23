@@ -139,7 +139,7 @@ watchEffect(async () => {
                 </div>
             </div>
 
-            <div class="md:mx-3">
+            <div class="mx-3">
                 <Link href="/" data-popover-target="cartPopover" data-popover-offset="25" data-popover-placement="bottom">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="w-6 h-6 stroke-2">
