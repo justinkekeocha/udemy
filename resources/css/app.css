@@ -22,6 +22,9 @@
     font-family: UdemySans;
     @apply antialiased;
   }
+  * {
+    /*outline: solid 1px red;*/
+  }
 
   h1,
   .h1 {
