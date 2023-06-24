@@ -208,7 +208,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </Slide>
         </section>
 
-        <section class="py-14 px-10 bg-white">
+        <section class="px-5 md:px-10 py-14 bg-white">
             <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Students are viewing
             </h2>
             <Slide>
@@ -260,25 +260,25 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </div>
         </section>
 
-        <section class="py-14 px-10 bg-slate-50">
+        <section class="container mx-auto py-14 px-10 bg-slate-50">
             <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Featured topics by
                 category
             </h2>
-            <div class="container mx-auto">
-                <div class="grid grid-cols-12 gap-5 mb-3">
-                    <template v-for="row in categories.slice(0, 4)">
-                        <div class="col-span-12 md:col-span-3">
-                            <h3 class="text-xl">{{ row.title }}</h3>
-                            <template v-for="row in groupSubcategories[row.id].slice(0, 2)">
-                                <Link :href="row.link">
-                                <p class="underline font-bold  text-violet-800 mb-1">{{ row.title }}</p>
-                                </Link>
-                                <p class="text-sm text-neutral-500 mb-5">7,070,015 students</p>
-                            </template>
-                        </div>
-                    </template>
-                </div>
+
+            <div class="grid grid-cols-12 gap-5 mb-3">
+                <template v-for="row in categories.slice(0, 4)">
+                    <div class="col-span-12 md:col-span-3">
+                        <h3 class="text-xl">{{ row.title }}</h3>
+                        <template v-for="row in groupSubcategories[row.id].slice(0, 2)">
+                            <Link :href="row.link">
+                            <p class="underline font-bold  text-violet-800 mb-1">{{ row.title }}</p>
+                            </Link>
+                            <p class="text-sm text-neutral-500 mb-5">7,070,015 students</p>
+                        </template>
+                    </div>
+                </template>
             </div>
+
             <Link type="button" href="#">
             <Button1>Explore more topics</Button1>
             </Link>
@@ -311,8 +311,8 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </div>
         </section>
 
-        <section class="p-0 md:py-16 md:px-56 bg-slate-50">
-            <Carousel class="mb-14">
+        <section class="px-5 md:px-56 py-16 bg-slate-50">
+            <Carousel class="mb-14 h-[40rem] md:h-96">
                 <template v-for="n in 8">
                     <Card1 class="duration-1000 ease-in-out" data-carousel-item>
                         <div class="container mx-auto">
@@ -329,7 +329,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                                         raise
                                         the bar on proficiency, skills, and competencies to meet client demand.</p>
                                 </div>
-                                <div class="col-span-12 md:col-span-6">
+                                <div class="col-span-12 md:col-span-6 ">
                                     <div class="flex flex-col md:items-center mb-10 md:mb-0">
                                         <img class="w-36 h-36 rounded-full mb-10"
                                             src="https://s.udemycdn.com/home/ub-case-studies/James_Hemgen.jpeg"
@@ -352,7 +352,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 </template>
             </Carousel>
             <Link href="#">
-            <div class="flex justify-center">
+            <div class="flex justify-start md:justify-center">
                 <p class="font-extrabold text-violet-800">View more customer stories
                 </p>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -365,24 +365,26 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </Link>
         </section>
 
-        <section class="p-0 md:py-16 md:px-44">
+        <section class="px-5 md:px-44 pt-16 md:py-16">
             <div class="container mx-auto">
 
-                <div class="grid grid-cols-12 gap-5 mb-20">
+                <div class="grid grid-cols-12 gap-5 mb-10 md:mb-20">
                     <div class="col-span-12 md:col-span-6">
-                        <img class="mb-5" src="../../../public/assets/img/logo-ub.svg" width="192" height="32">
-                        <h3 class="font-SuisseWorks text-4xl mb-5">Upskill your team with Udemy Business</h3>
-                        <ul class="list-disc list-outside text-xl grid gap-y-2 ms-5 mb-5">
-                            <li>Unlimited access to 22,000+ top Udemy courses, anytime, anywhere</li>
-                            <li>International course collection in 14 languages</li>
-                            <li>Top certifications in tech and business</li>
-                        </ul>
-                        <div class="flex">
+                        <div class="flex flex-col items-center md:items-start"><img class="mb-5"
+                                src="../../../public/assets/img/logo-ub.svg" width="192" height="32">
+                            <h3 class="font-SuisseWorks text-4xl mb-5 mx-auto">Upskill your team with Udemy Business</h3>
+                            <ul class="list-disc list-outside text-xl grid gap-y-2 ms-5 mb-5">
+                                <li>Unlimited access to 22,000+ top Udemy courses, anytime, anywhere</li>
+                                <li>International course collection in 14 languages</li>
+                                <li>Top certifications in tech and business</li>
+                            </ul>
+                        </div>
+                        <div class="flex flex-col md:flex-row">
                             <Button2 class="text-lg font-black">Get {{ $page.props.appName }} Business</Button2>
                             <Button1 class="text-lg font-black">Learn more</Button1>
                         </div>
                     </div>
-                    <div class="col-span-12 md:col-span-6">
+                    <div class="col-span-12 md:col-span-6 order-first md:order-none">
                         <div class="ms-0 md:ms-16">
                             <img src="../../../public/assets/img/UB_Promo_1200x1200.jpg">
                         </div>
@@ -394,22 +396,21 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                         <img src="../../../public/assets/img/instructor-2x-v3.jpg">
                     </div>
                     <div class="col-span-12 md:col-span-6">
-                        <div class="ms-0 md:ms-16 mt-28">
-                            <h3 class="font-SuisseWorks text-3xl mb-5">Become an instructor</h3>
-                            <p class="mb-5 text-lg">Instructors from around the world teach millions of students on Udemy.
+                        <div class="ms-0 md:ms-16 mt-0 md:mt-28 text-center">
+                            <h3 class="font-SuisseWorks text-2xl md:text-3xl mb-5">Become an instructor</h3>
+                            <p class="mb-5 text-base md:text-lg">Instructors from around the world teach millions of
+                                students on
+                                Udemy.
                                 We
                                 provide the tools
                                 and skills to teach what you love.</p>
-                            <Button2 class="text-lg font-black">Start teaching today</Button2>
+                            <Button2 class="text-lg font-black w-full md:w-auto">Start teaching today</Button2>
                         </div>
                     </div>
                 </div>
 
             </div>
         </section>
-
-
-
 
     </Layout>
 </template>
