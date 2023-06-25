@@ -19,3 +19,9 @@ axios.get(route("sub-category.index")).then((response) => {
 
 //https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save'
 //https://codepen.io/disguy-droid/details/wvxrPEL
+
+//Things learnt
+
+//How to use custom fonts. example (I was able to use the custom UdemySans font)
+//States with Pinia
+//Use the vue instruction for flowbite when installing the component library
