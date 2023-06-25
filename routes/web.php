@@ -33,8 +33,21 @@ Route::get('/', function () {
    return Inertia::render("Home", compact('categories', 'subCategories', 'courses'));
 })->name('home');
 
+// Route::prefix('/courses')->group(function () {
+
+//    Route::prefix('/{subCategory}')->controller(SubCategoryController::class)->group(function () {
+//       Route::get('/', 'show')->name('show');
+//    });
+//    Route::prefix('/{category}')->controller(CategoryController::class)->group(function () {
+//       Route::get('/', 'show')->name('show');
+//    });
+// });
+
+
+
 Route::prefix('/courses/{category}')->controller(CategoryController::class)->name('category.')->group(function () {
-   Route::get('/ ', 'show')->name('show');
+   //dd(Route::get('/ ', 'show'));
+   Route::get('/', 'show')->name('show');
 });
 
 Route::prefix('/courses/{subCategory}')->controller(SubCategoryController::class)->name('subCategory.')->group(function () {
