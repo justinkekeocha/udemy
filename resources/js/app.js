@@ -2,7 +2,6 @@ import "./bootstrap";
 import { createApp, h } from "vue";
 import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 import Layout from "/resources/js/Components/Layout.vue";
-import "flowbite";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/src/js/vue";
 import { createPinia } from "pinia";
 import Button1 from "../js/Components/Buttons/Button1.vue";
@@ -28,7 +27,5 @@ createInertiaApp({
       .component("Button1", Button1)
       .component("Button2", Button2)
       .mount(el);
-
-    //initFlowbite();
   },
 });
