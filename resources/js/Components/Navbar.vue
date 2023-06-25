@@ -1,7 +1,5 @@
 <script setup>
-import { watchEffect } from "vue";
 import Popover from "../Components/Popover.vue";
-import { initDropdowns } from "flowbite";
 import { useCategoryStore } from "../Stores/CategoryStore";
 import { useSubCategoryStore } from "../Stores/SubCategoryStore";
 
@@ -9,21 +7,15 @@ const categoryStore = useCategoryStore();
 categoryStore.getCategories();
 
 const subCategoryStore = useSubCategoryStore();
-watchEffect(async () => {
-    await subCategoryStore.getSubCategories();
-    setTimeout(() => {
-        initDropdowns();
-    }, 1000)
-
-});
+subCategoryStore.getSubCategories();
 </script>
 
 <template>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 shadow-[0_2px_4px_rgba(0,0,0,0.08)] md:shadow-none dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
 
             <button data-collapse-toggle="navbar-cta" type="button"
-                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-0 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 text-sm zinc-900 rounded-lg md:hidden  focus:outline-none focus:ring-0 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="navbar-cta" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -75,10 +67,11 @@ watchEffect(async () => {
                         class="z-50 hidden bg-white divide-y divide-gray-100 shadow w-44 dark:bg-gray-700">
                         <ul class="py-2  text-gray-700 dark:text-gray-200">
                             <li v-for="row in subCategory">
-                                <a :href="row.link"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{
-                                        row.title }}
-                                </a>
+                                <Link :href="row.link"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                {{ row.title }}
+                                </Link>
+
                             </li>
                         </ul>
                     </div>
