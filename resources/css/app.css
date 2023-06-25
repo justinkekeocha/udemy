@@ -1,9 +1,16 @@
 /*@import url('https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2');
 @import url('https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2');*/
 
+/**You need to register the font in tailwind.config.js, to be able to do things like font-UdemySansBold*/
 @font-face {
   font-family: "UdemySans";
   src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2")
+    format("woff");
+}
+
+@font-face {
+  font-family: "UdemySansBold";
+  src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2")
     format("woff");
 }
 
@@ -36,12 +43,12 @@
   }
   h3,
   .h3 {
-    @apply text-2xl font-extrabold font-UdemySans mb-3;
+    @apply text-2xl font-extrabold font-UdemySansBold mb-3;
   }
 
   h4,
   .h4 {
-    @apply text-xl font-extrabold font-UdemySans mb-3;
+    @apply text-xl font-extrabold font-UdemySansBold mb-3;
   }
 
   hr {
