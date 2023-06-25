@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       
     }
 
     /**
@@ -37,7 +37,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $category = new CategoryResource($category);
+        return Inertia::render("Category/Show", compact('category'));
     }
 
     /**
