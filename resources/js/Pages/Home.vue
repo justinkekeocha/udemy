@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, onBeforeMount } from 'vue'
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import Slide from "../Components/Slide.vue"
 import CarouselControls from '../Components/Buttons/CarouselControls.vue'
@@ -125,7 +124,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 <!-- Loop through subcategories-->
                 <template v-for="(row, index) in groupSubcategories[1]">
                     <div class="hidden p-3 md:p-10" :id="row.title + '-tab'" role="tabpanel">
-                        <h2 class="font-UdemySans text-2xl tracking-tight">
+                        <h2 class="font-UdemySansBold text-2xl tracking-tight">
                             Expand your career opportunities with {{ row.title }}
                         </h2>
                         <p class="line-clamp-3 text-ellipsis md:w-2/3">
@@ -174,7 +173,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         </section>
 
         <section class="px-5 md:px-10 py-14 bg-slate-50">
-            <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">How learners like you are achieving their
+            <h2 class="font-UdemySansBold text-2xl leading-5 tracking-tight mb-9">How learners like you are achieving their
                 goals
             </h2>
             <Slide>
@@ -183,7 +182,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                         <img class="mb-5" src="https://s.udemycdn.com/browse_components/student-quote-unit/quote.svg"
                             width="17.78" height="16">
                         <p class="mb-5"> I am proud to say that after a few months of taking this course...<span
-                                class="font-extrabold">I passed
+                                class="font-extrabold font-UdemySansBold">I passed
                                 my exam and am now an AWS Certified Cloud Practitioner!</span> This content was exactly what
                             the
                             CCP
@@ -209,7 +208,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         </section>
 
         <section class="px-5 md:px-10 py-14 bg-white">
-            <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Students are viewing
+            <h2 class="font-UdemySansBold text-2xl leading-5 tracking-tight mb-9">Students are viewing
             </h2>
             <Slide>
                 <template v-for="(row, index) in groupCoursesbySubCategory[
@@ -244,7 +243,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
 
         <!--Categories section-->
         <section class="container mx-auto p-5 mb-12">
-            <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Top categories
+            <h2 class="font-UdemySansBold text-2xl leading-5 tracking-tight mb-9">Top categories
             </h2>
             <div class="grid grid-cols-12 gap-5">
                 <template v-for="row in categories">
@@ -261,7 +260,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         </section>
 
         <section class="container mx-auto py-14 px-10 bg-slate-50">
-            <h2 class="font-UdemySans text-2xl leading-5 tracking-tight mb-9">Featured topics by
+            <h2 class="font-UdemySansBold text-2xl leading-5 tracking-tight mb-9">Featured topics by
                 category
             </h2>
 
