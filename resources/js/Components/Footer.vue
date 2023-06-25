@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-zinc-900 text-white pt-10 px-12 text-sm">
+    <footer class="bg-zinc-900 text-white px-6 md:px-12 pt-10 text-sm">
         <div class="container mx-auto mb-12">
             <div class="grid grid-cols-12">
                 <div class="col-span-12 md:col-span-3">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-3 md:justify-self-end order-first md:order-none">
-                    <button class="border border-white min-w-[9rem] px-3 py-2 text-base">
+                    <button class="border border-white min-w-[9rem] px-3 py-2 text-base mb-8">
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6 stroke-2 me-1">
@@ -76,9 +76,9 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-between py-8 text-sm ">
+        <div class="flex flex-col md:flex-row justify-between py-8 text-sm ">
             <Link href="#">
-            <img src="../../../public/assets/img/logo-udemy-inverted.svg" class="h-8" />
+            <img src="../../../public/assets/img/logo-udemy-inverted.svg" class="h-8 mb-5 md:mb-0" />
             </Link>
             <span class="text-xs">© 2023 Udemy, Inc.</span>
         </div>
