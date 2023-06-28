@@ -17,10 +17,7 @@ onMounted(() => {
         <meta name="description" :content="description" />
         <link href="/favicon.png" rel="icon">
     </Head>
-
     <Navbar />
-
-
     <slot />
     <Footer></Footer>
 </template>
