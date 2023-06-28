@@ -16,6 +16,9 @@ createInertiaApp({
     const app = createApp({ render: () => h(App, props) });
 
     // app.config.globalProperties.$getProps = () => usePage().props
+    /**TODO:
+     * Nothing just testing
+     */
 
     app
       .use(plugin)
