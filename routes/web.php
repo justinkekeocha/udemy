@@ -24,7 +24,6 @@ use App\Models\Category;
 |
 */
 
-
 Route::get('/', function () {
    //$subCategories = SubCategoryResource::collection(SubCategory::all()->where('category_id', 1));
    $categories = CategoryResource::collection(Category::all());
@@ -32,16 +31,6 @@ Route::get('/', function () {
    $courses =  CourseResource::collection(Course::all());
    return Inertia::render("Home", compact('categories', 'subCategories', 'courses'));
 })->name('home');
-
-// Route::prefix('/courses')->group(function () {
-
-//    Route::prefix('/{subCategory}')->controller(SubCategoryController::class)->group(function () {
-//       Route::get('/', 'show')->name('show');
-//    });
-//    Route::prefix('/{category}')->controller(CategoryController::class)->group(function () {
-//       Route::get('/', 'show')->name('show');
-//    });
-// });
 
 
 
