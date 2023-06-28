@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
+use App\Models\Course;
+use App\Http\Resources\CourseResource;
 
 class CategoryController extends Controller
 {
@@ -38,7 +40,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $category = new CategoryResource($category);
-        return Inertia::render("Category/Show", compact('category'));
+        $courses = CourseResource::collection($category->courses);
+        return Inertia::render("Category/Show", compact('category', 'courses'));
     }
 
     /**
