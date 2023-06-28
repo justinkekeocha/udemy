@@ -1,67 +1,86 @@
 <script setup>
-const props = defineProps({ category: Object })
+import { ref } from 'vue'
+import { camel } from 'radash';
+import CoursesSlide from '../../Components/Slides/CoursesSlide.vue';
+import Carousel from '../../Components/Carousel.vue';
+import CarouselControls from '../../Components/Buttons/CarouselControls.vue'
+const props = defineProps({ category: Object, courses: Object })
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+const coursesTab = ref([
+    {
+        title: 'Most popular',
+        limit: 0
+    },
+    {
+        title: 'New',
+        limit: 3
+    },
+    {
+        title: 'Trending',
+        limit: 8
+    },
+])
 </script>
 <template>
     <Layout :title="'Online ' + category.title + ' courses | ' + $page.props.appName" description="hello">
-        <main class="px-5 py-10">
+        <main class="px-5 md:px-10 py-14">
             <h1 class="mb-10"> {{ category.title }} Courses</h1>
-            <h2 class="font-UdemySansBold h3 font-black">Courses to get you started</h2>
             <section>
-
-                <div class="mb-4 border-b  border-gray-200 dark:border-gray-700">
+                <h2 class="font-UdemySansBold h3 font-black">Courses to get you started</h2>
+                <div class="border-b  border-gray-200 dark:border-gray-700">
                     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab"
                         data-tabs-toggle="#coursesTabContent" role="tablist">
-                        <li class="mr-2" role="presentation">
-                            <button
-                                class="inline-block p-4 font-semibold font-UdemySansBold text-base  text-neutral-500 hover:text-black aria-selected:border-b-2 aria-selected:border-b-black aria-selected:text-black"
-                                id="most-popular-tab" data-tabs-target="#mostPopular" type="button" role="tab"
-                                aria-controls="profile" aria-selected="false">Most popular</button>
-                        </li>
-                        <li class="mr-2" role="presentation">
-                            <button
-                                class="inline-block p-4 font-semibold font-UdemySansBold text-base  text-neutral-500 hover:text-black aria-selected:border-b-2 aria-selected:border-b-black aria-selected:text-black"
-                                id="new-tab" data-tabs-target="#new" type="button" role="tab" aria-controls="dashboard"
-                                aria-selected="false">New</button>
-                        </li>
-                        <li class="mr-2" role="presentation">
-                            <button
-                                class="inline-block p-4 font-semibold font-UdemySansBold text-base  text-neutral-500 hover:text-black aria-selected:border-b-2 aria-selected:border-b-black aria-selected:text-black"
-                                id="settings-tab" data-tabs-target="#trending" type="button" role="tab"
-                                aria-controls="settings" aria-selected="false">Trending</button>
-                        </li>
+                        <template v-for="row in coursesTab">
+                            <li class="mr-2" role="presentation">
+                                <button
+                                    class="inline-block p-4 font-semibold font-UdemySansBold text-base  text-neutral-500 hover:text-black aria-selected:border-b-2 aria-selected:border-b-black aria-selected:text-black"
+                                    :data-tabs-target="'#' + camel(row.title)" type="button" role="tab"
+                                    aria-selected="false">{{ row.title }}</button>
+                            </li>
+                        </template>
                     </ul>
                 </div>
                 <div id="coursesTabContent">
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="mostPopular" role="tabpanel"
-                        aria-labelledby="most-popular-tab">
-                        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                                class="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>.
-                            Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript
-                            swaps classes to control the content visibility and styling.</p>
-                    </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="new" role="tabpanel"
-                        aria-labelledby="new-tab">
-                        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                                class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated
-                                content</strong>. Clicking another tab will toggle the visibility of this one for the next.
-                            The tab JavaScript swaps classes to control the content visibility and styling.</p>
-                    </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="trending" role="tabpanel"
-                        aria-labelledby="settings-tab">
-                        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                                class="font-medium text-gray-800 dark:text-white">Settings tab's associated
-                                content</strong>. Clicking another tab will toggle the visibility of this one for the next.
-                            The tab JavaScript swaps classes to control the content visibility and styling.</p>
-                    </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel"
-                        aria-labelledby="contacts-tab">
-                        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                                class="font-medium text-gray-800 dark:text-white">Contacts tab's associated
-                                content</strong>. Clicking another tab will toggle the visibility of this one for the next.
-                            The tab JavaScript swaps classes to control the content visibility and styling.</p>
-                    </div>
-                </div>
+                    <template v-for="row in coursesTab">
+                        <div class="hidden" role="tabpanel" :id="camel(row.title)">
+                            <!-- Slice picks different parts of the courses object and shows it -->
+                            <CoursesSlide :courses="courses.slice(row.limit)"></CoursesSlide>
+                        </div>
+                    </template>
 
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-UdemySansBold h3 font-black">Featured Courses</h2>
+                <div class="p-6 border border-gray-300 hover:bg-slate-50 transition-opacity">
+                    <Carousel class="md:h-60" data-carousel="slide">
+                        <template v-for="row in courses">
+                            <Link :href="row.link">
+                            <Card1 class="group duration-1000 ease-in-out" data-carousel-item>
+                                <div class="container mx-auto">
+                                    <div class="grid grid-cols-12 h-full">
+                                        <div class="col-span-12 md:col-span-6">
+                                            <div class="bg-zinc-900 ">
+                                                <img class="w-full h-auto object-cover group-hover:opacity-80 transition-opacity"
+                                                    :src="row.image">
+                                            </div>
+                                        </div>
+                                        <div class="col-span-12 md:col-span-6">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </Card1>
+                            </Link>
+                        </template>
+                        <template v-slot:carousel-controls>
+                            <CarouselControls previousControlCustom="-left-10" nextControlCustom="-right-10">
+                            </CarouselControls>
+                        </template>
+                    </Carousel>
+                </div>
             </section>
         </main>
     </Layout>
