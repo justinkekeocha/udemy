@@ -1,11 +1,11 @@
 <script setup>
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
-import Slide from "../Components/Slide.vue"
+import Slide from "../Components/Slides/Slide.vue"
+import Carousel from '../Components/Carousel.vue';
 import CarouselControls from '../Components/Buttons/CarouselControls.vue'
-import StarRating from "../Components/StarRating.vue";
 import Card1 from "../Components/Cards/Card1.vue";
 import { Link } from '@inertiajs/vue3';
-import Carousel from '../Components/Carousel.vue';
+import CoursesSlide from "../Components/Slides/CoursesSlide.vue";
 
 
 const props = defineProps({
@@ -138,35 +138,10 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                         <Button1>Explore {{ row.title }}</Button1>
                         </Link>
                         <!-- Get only courses that belong to that subcategory-->
-                        <Slide>
-                            <template v-for="(row, index) in groupCoursesbySubCategory[
-                                row.id
-                            ]">
-
-                                <div>
-                                    <Link class="my-5" :href="row.link">
-                                    <img class="w-full h-32 object-cover border border-stone-400 hover:transition-opacity hover:opacity-80"
-                                        :src="row.image" alt="" />
-                                    <div class="p-5">
-                                        <h3 class="text-base line-clamp-2 text-ellipsis tracking-tight mb-0">
-                                            {{ row.title }}
-                                        </h3>
-                                        <p class="text-xs line-clamp-1 text-ellipsis text-gray-400">{{
-                                            row.instructor.name }}</p>
-                                        <div class="flex">
-                                            <span class="text-sm font-bold text-yellow-600">4.6</span>
-                                            <StarRating />
-                                            <span class="text-gray-400 text-xs ms-1">(499,666) </span>
-                                        </div>
-                                        <p class="mb-3 font-bold">₦ {{ row.price }} <span
-                                                class="line-through text-gray-400 text-sm font-normal ms-1">{{
-                                                    row.inflated_price }}</span>
-                                        </p>
-                                    </div>
-                                    </Link>
-                                </div>
-                            </template>
-                        </Slide>
+                        <CoursesSlide :courses="groupCoursesbySubCategory[
+                            row.id
+                        ]">
+                        </CoursesSlide>
                     </div>
                 </template>
             </div>
@@ -210,35 +185,9 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         <section class="px-5 md:px-10 py-14 bg-white">
             <h2 class="font-UdemySansBold text-2xl leading-5 tracking-tight mb-9">Students are viewing
             </h2>
-            <Slide>
-                <template v-for="(row, index) in groupCoursesbySubCategory[
-                    1
-                ]">
-
-                    <div>
-                        <Link class="my-5" :href="row.link">
-                        <img class="w-full h-32 object-cover border border-stone-400 hover:transition-opacity hover:opacity-80"
-                            :src="row.image" alt="" />
-                        <div class="p-5">
-                            <h3 class="text-base line-clamp-2 text-ellipsis tracking-tight mb-0">
-                                {{ row.title }}
-                            </h3>
-                            <p class="text-xs line-clamp-1 text-ellipsis text-gray-400">{{
-                                row.instructor.name }}</p>
-                            <div class="flex">
-                                <span class="text-sm font-bold text-yellow-600">4.6</span>
-                                <StarRating />
-                                <span class="text-gray-400 text-xs ms-1">(499,666) </span>
-                            </div>
-                            <p class="mb-3 font-bold">₦ {{ row.price }} <span
-                                    class="line-through text-gray-400 text-sm font-normal ms-1">{{
-                                        row.inflated_price }}</span>
-                            </p>
-                        </div>
-                        </Link>
-                    </div>
-                </template>
-            </Slide>
+            <CoursesSlide :courses="groupCoursesbySubCategory[
+                1
+            ]"></CoursesSlide>
         </section>
 
         <!--Categories section-->
@@ -347,7 +296,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                     </Card1>
                 </template>
                 <template v-slot:carousel-controls>
-                    <CarouselControls previousControlCustom="-left-9" nextControlCustom="-right-9"></CarouselControls>
+                    <CarouselControls previousControlCustom="-left-6" nextControlCustom="-right-6"></CarouselControls>
                 </template>
             </Carousel>
             <Link href="#">
