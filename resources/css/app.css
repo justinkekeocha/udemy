@@ -4,20 +4,17 @@
 /**You need to register the font in tailwind.config.js, to be able to do things like font-UdemySansBold*/
 @font-face {
   font-family: "UdemySans";
-  src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2")
-    format("woff");
+  src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Regular-v1.woff2") format("woff");
 }
 
 @font-face {
   font-family: "UdemySansBold";
-  src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2")
-    format("woff");
+  src: url("https://www.udemy.com/staticx/udemy/fonts/Udemy-Sans-Bold-v1.woff2") format("woff");
 }
 
 @font-face {
   font-family: "SuisseWorks";
-  src: url("https://www.udemy.com/staticx/udemy/fonts/SuisseWorks-Bold-v1.woff2")
-    format("woff");
+  src: url("https://www.udemy.com/staticx/udemy/fonts/SuisseWorks-Bold-v1.woff2") format("woff");
 }
 
 @tailwind base;
@@ -29,6 +26,7 @@
     font-family: UdemySans;
     @apply antialiased;
   }
+
   * {
     /*outline: solid 1px red;*/
   }
@@ -37,10 +35,12 @@
   .h1 {
     @apply text-4xl font-extrabold font-SuisseWorks mb-3;
   }
+
   h2,
   .h2 {
     @apply text-3xl font-extrabold font-SuisseWorks mb-3;
   }
+
   h3,
   .h3 {
     @apply text-2xl font-extrabold font-UdemySansBold mb-3;
