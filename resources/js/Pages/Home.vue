@@ -36,7 +36,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         <section>
             <Carousel>
                 <!-- Item 1 -->
-                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                <div class="relative">
                     <div>
                         <img src="../../../public/assets/img/carousel-1.jpg"
                             class="h-44 w-full md:h-full object-cover object-center" alt="..." />
@@ -52,7 +52,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                     </div>
                 </div>
                 <!-- Item 2 -->
-                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                <div class="relative">
                     <img src="../../../public/assets/img/carousel-2.jpg"
                         class="h-44 w-full md:h-full object-cover object-center" alt="..." />
                     <div
@@ -68,7 +68,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                     </div>
                 </div>
                 <!-- Item 3 -->
-                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                <div class="relative">
                     <img src="../../../public/assets/img/carousel-3.jpg"
                         class="h-44 w-full md:h-full object-cover object-center" alt="..." />
                     <div
@@ -82,7 +82,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                     </div>
                 </div>
                 <!-- Item 4 -->
-                <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                <div class="relative">
                     <img src="../../../public/assets/img/carousel-4.jpg"
                         class="h-44 w-full md:h-full object-cover object-center" alt="..." />
                     <div
@@ -100,7 +100,9 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
 
         </section>
 
+
         <section class="p-5 mb-5">
+
             <h2 class="text-3xl font-extrabold font-SuisseWorks mb-3">
                 A broad selection of courses
             </h2>
@@ -153,7 +155,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </h2>
             <Slide>
                 <template v-for="n in 8">
-                    <Card1 class="min-w-[25rem]">
+                    <Card1 class="max-w-[25rem]">
                         <img class="mb-5" src="https://s.udemycdn.com/browse_components/student-quote-unit/quote.svg"
                             width="17.78" height="16">
                         <p class="mb-5"> I am proud to say that after a few months of taking this course...<span
@@ -262,7 +264,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         <section class="px-5 md:px-56 py-16 bg-slate-50">
             <Carousel class="mb-14 h-[40rem] md:h-96">
                 <template v-for="n in 8">
-                    <Card1 class="duration-1000 ease-in-out" data-carousel-item>
+                    <Card1 class="duration-1000 ease-in-out" >
                         <div class="container mx-auto">
                             <div class="grid grid-cols-12 gap-5 mb-3 h-full">
                                 <div class="col-span-12 md:col-span-6">
@@ -296,7 +298,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                     </Card1>
                 </template>
                 <template v-slot:carousel-controls>
-                    <CarouselControls previousControlCustom="-left-6" nextControlCustom="-right-6"></CarouselControls>
+                    <CarouselControls previousControlCustom="!-left-5" nextControlCustom="!-right-5"></CarouselControls>
                 </template>
             </Carousel>
             <Link href="#">
