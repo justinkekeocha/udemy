@@ -20,6 +20,7 @@ class CourseResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
             'image' => $this->image,
             'price' => number_format($this->price),
             'inflated_price' => number_format($this->price * 13),
