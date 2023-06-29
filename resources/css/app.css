@@ -54,4 +54,16 @@
   hr {
     @apply border-gray-300 my-5;
   }
+
+  .slides-container {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .slides-container::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+  }
 }
