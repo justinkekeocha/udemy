@@ -6,7 +6,7 @@ defineProps({ courses: Object })
 <template>
     <Slide>
         <template v-for="(row, index) in courses" :key="row.id">
-            <div class="flex flex-col">
+            <div class="flex flex-col max-w-[15rem]">
                 <Link class="my-5" :href="row.link">
                 <img class="w-full h-32 object-cover border border-stone-400 hover:transition-opacity hover:opacity-80"
                     :src="row.image" alt="" />
@@ -16,13 +16,9 @@ defineProps({ courses: Object })
                     </h3>
                     <p class="text-xs line-clamp-1 text-ellipsis text-gray-400">{{
                         row.instructor.name }}</p>
-                    <div class="flex">
-                        <span class="text-sm font-bold text-yellow-600">4.6</span>
-                        <StarRating />
-                        <span class="text-gray-400 text-xs ms-1">(499,666) </span>
-                    </div>
-                    <p class="mb-3 font-bold">₦ {{ row.price }} <span
-                            class="line-through text-gray-400 text-sm font-normal ms-1">{{
+                    <StarRating />
+                    <p class="mb-3 font-UdemySansBold font-black">₦{{ row.price }} <span
+                            class="line-through text-gray-400 text-sm font-normal ms-1">₦{{
                                 row.inflated_price }}</span>
                     </p>
                 </div>
