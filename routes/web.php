@@ -35,7 +35,6 @@ Route::get('/', function () {
 
 
 Route::prefix('/courses/{category}')->controller(CategoryController::class)->name('category.')->group(function () {
-   //dd(Route::get('/ ', 'show'));
    Route::get('/', 'show')->name('show');
 });
 
