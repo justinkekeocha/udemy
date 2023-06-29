@@ -46,7 +46,7 @@ subCategoryStore.getSubCategories();
                             <li class="w-full px-4 py-2 hover:text-purple-600"
                                 :data-dropdown-toggle="'subCategory' + row.id + 'Dropdown'"
                                 data-dropdown-placement="right-start" data-dropdown-trigger="hover"
-                                data-dropdown-offset-distance="15">
+                                data-dropdown-offset-distance="15" data-dropdown-offset-skidding="10">
                                 <Link :href="row.link" class="flex items-center justify-between">
                                 {{ row.title }}
                                 <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
