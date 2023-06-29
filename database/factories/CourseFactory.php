@@ -17,7 +17,7 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->sentence();
+        $title = trim(fake()->sentence(), '.');
         return [
             'title' => ucfirst($title),
             'description' =>  fake()->text(),
