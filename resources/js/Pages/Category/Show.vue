@@ -3,7 +3,8 @@ import { ref } from 'vue'
 import { camel } from 'radash';
 import CoursesSlide from '../../Components/Slides/CoursesSlide.vue';
 import Carousel from '../../Components/Carousel.vue';
-import CarouselControls from '../../Components/Buttons/CarouselControls.vue'
+import StarRating from '../../Components/StarRating.vue'
+import SlideControls from '../../Components/Slides/SlideControls.vue';
 const props = defineProps({ category: Object, courses: Object })
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 const coursesTab = ref([
@@ -54,30 +55,57 @@ const coursesTab = ref([
             <section>
                 <h2 class="font-UdemySansBold h3 font-black">Featured Courses</h2>
                 <div class="p-6 border border-gray-300 hover:bg-slate-50 transition-opacity">
-                    <Carousel class="md:h-60" data-carousel="slide">
+                    <Carousel>
                         <template v-for="row in courses">
-                            <Link :href="row.link">
-                            <Card1 class="group duration-1000 ease-in-out" data-carousel-item>
-                                <div class="container mx-auto">
-                                    <div class="grid grid-cols-12 h-full">
-                                        <div class="col-span-12 md:col-span-6">
-                                            <div class="bg-zinc-900 ">
-                                                <img class="w-full h-auto object-cover group-hover:opacity-80 transition-opacity"
+                            <div class="group">
+                                <Link :href="row.link">
+                                <div class="container">
+                                    <div class="grid grid-cols-12 gap-7">
+                                        <div class="col-span-12 md:col-span-5">
+                                            <div class="bg-zinc-900">
+                                                <img class="w-full h-auto object-center object-cover align-middle group-hover:opacity-80 transition-opacity"
                                                     :src="row.image">
                                             </div>
                                         </div>
-                                        <div class="col-span-12 md:col-span-6">
-
-
+                                        <div class="col-span-12 md:col-span-7">
+                                            <div class="grid grid-cols-1 content-between max-w-lg">
+                                                <div class="flex flex-col gap-1">
+                                                    <p class="h3 mb-0">{{ row.title }}
+                                                    </p>
+                                                    <p class="line-clamp-3 text-ellipsis">{{ row.description }}</p>
+                                                    <p class="text-xs line-clamp-1 text-ellipsis text-neutral-500">By {{
+                                                        row.instructor.name }}</p>
+                                                    <p class="text-xs">
+                                                        <span class="text-teal-800">Updated <b
+                                                                class="font-UdemySansBold">June
+                                                                2023</b></span>
+                                                        <span class="ms-2 text-neutral-500">67 total hours . 410 lectures .
+                                                            All
+                                                            levels</span>
+                                                    </p>
+                                                    <div class="flex">
+                                                        <StarRating class="me-2" /> <span
+                                                            class="bg-amber-400 text-yellow-950 font-UdemySansBold text-xs p-1">Highest
+                                                            rated</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xl">
+                                                        <span class="font-UdemySansBold font-black">₦{{ row.price }}</span>
+                                                        <span class="line-through text-gray-400 font-normal ms-2">₦{{
+                                                            row.inflated_price }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </Card1>
-                            </Link>
+                                </Link>
+                            </div>
+
                         </template>
                         <template v-slot:carousel-controls>
-                            <CarouselControls previousControlCustom="-left-10" nextControlCustom="-right-10">
-                            </CarouselControls>
+                            <SlideControls></SlideControls>
                         </template>
                     </Carousel>
                 </div>
