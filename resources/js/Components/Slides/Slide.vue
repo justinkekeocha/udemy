@@ -39,6 +39,6 @@ defineProps({
 </template>
 <style scoped>
 :slotted(div) {
-    @apply snap-always snap-center;
+    @apply snap-center;
 }
 </style> 
