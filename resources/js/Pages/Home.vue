@@ -262,9 +262,9 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         </section>
 
         <section class="px-5 md:px-56 py-16 bg-slate-50">
-            <Carousel class="mb-14 h-[40rem] md:h-96">
+            <Carousel class="mb-14">
                 <template v-for="n in 8">
-                    <Card1 class="duration-1000 ease-in-out" >
+                    <Card1 class="duration-1000 ease-in-out">
                         <div class="container mx-auto">
                             <div class="grid grid-cols-12 gap-5 mb-3 h-full">
                                 <div class="col-span-12 md:col-span-6">
