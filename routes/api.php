@@ -22,10 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/category',function(){
+Route::get('/category', function () {
     return CategoryResource::collection(Category::all());
-})->name('category.index');
+})->name('categories.index');
 
-Route::get('/sub-category',function(){
+Route::get('/sub-category', function () {
     return SubCategoryResource::collection(SubCategory::all());
-})->name('sub-category.index');
+})->name('subCategories.index');
