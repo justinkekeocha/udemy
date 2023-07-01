@@ -12,7 +12,7 @@ export const useSubCategoryStore = defineStore("subCategoryStore", {
   actions: {
     async getSubCategories() {
       try {
-        const response = await axios.get(route("sub-category.index"));
+        const response = await axios.get(route("subCategories.index"));
         this.subCategories = response.data;
         this.groupedSubCategories = await useGroupArrayByKey(
           response.data,
