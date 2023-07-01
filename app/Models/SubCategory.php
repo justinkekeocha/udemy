@@ -25,7 +25,7 @@ class SubCategory extends Model
     }
     public function topics(): HasMany
     {
-        $this->hasMany(Topic::class);
+        return $this->hasMany(Topic::class);
     }
     public function courses(): HasManyThrough
     {
