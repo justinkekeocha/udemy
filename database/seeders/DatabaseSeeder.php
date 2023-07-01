@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Faker\Factory;
 use App\Models\User;
+use App\Models\Topic;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -46,8 +47,12 @@ class DatabaseSeeder extends Seeder
          ->sequence(fn (Sequence $sequence) => ['category_id' => Category::all()->random()])
          ->create();
 
-      Course::factory(340)
+      Topic::factory(128)
          ->sequence(fn (Sequence $sequence) => ['sub_category_id' => SubCategory::all()->random()])
+         ->create();
+
+      Course::factory(1280)
+         ->sequence(fn (Sequence $sequence) => ['topic_id' => Topic::all()->random()])
          ->sequence(fn (Sequence $sequence) => ['instructor_id' => User::all()->random()])
          ->sequence(
             ['image' => 'https://img-c.udemycdn.com/course/240x135/1565838_e54e_16.jpg'],
