@@ -1,8 +1,8 @@
 <script setup>
 import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import Slide from "../Components/Slides/Slide.vue"
-import Carousel from '../Components/Carousel.vue';
-import CarouselControls from '../Components/Buttons/CarouselControls.vue'
+import Carousel from '../Components/Carousels/Carousel.vue';
+import CarouselControls from '../Components/Carousels/CarouselControls.vue'
 import Card1 from "../Components/Cards/Card1.vue";
 import { Link } from '@inertiajs/vue3';
 import CoursesSlide from "../Components/Slides/CoursesSlide.vue";
@@ -216,6 +216,7 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             </h2>
 
             <div class="grid grid-cols-12 gap-5 mb-3">
+                <!--Used subCategories here in place of topics -->
                 <template v-for="row in categories.slice(0, 4)">
                     <div class="col-span-12 md:col-span-3">
                         <h3 class="text-xl">{{ row.title }}</h3>

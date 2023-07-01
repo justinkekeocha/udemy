@@ -2,10 +2,11 @@
 import { ref } from 'vue'
 import { camel } from 'radash';
 import CoursesSlide from '../../Components/Slides/CoursesSlide.vue';
-import Carousel from '../../Components/Carousel.vue';
+import Carousel from '../../Components/Carousels/Carousel.vue';
 import StarRating from '../../Components/StarRating.vue'
+import Slide from '../../Components/Slides/Slide.vue'
 import SlideControls from '../../Components/Slides/SlideControls.vue';
-const props = defineProps({ category: Object, courses: Object })
+const props = defineProps({ model: Object, courses: Object })
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 const coursesTab = ref([
     {
@@ -23,9 +24,9 @@ const coursesTab = ref([
 ])
 </script>
 <template>
-    <Layout :title="'Online ' + category.title + ' courses | ' + $page.props.appName" description="hello">
+    <Layout :title="'Online ' + model.title + ' courses | ' + $page.props.appName" description="hello">
         <main class="px-5 md:px-10 py-14">
-            <h1 class="mb-10"> {{ category.title }} Courses</h1>
+            <h1 class="mb-10"> {{ model.title }} Courses</h1>
             <section>
                 <h2 class="font-UdemySansBold h3 font-black">Courses to get you started</h2>
                 <div class="border-b  border-gray-200 dark:border-gray-700">
@@ -52,7 +53,7 @@ const coursesTab = ref([
                 </div>
             </section>
 
-            <section>
+            <section class="mb-10">
                 <h2 class="font-UdemySansBold h3 font-black">Featured Courses</h2>
                 <div class="p-6 border border-gray-300 hover:bg-slate-50 transition-opacity">
                     <Carousel>
@@ -110,6 +111,23 @@ const coursesTab = ref([
                     </Carousel>
                 </div>
             </section>
+
+            <section>
+                <h2 class="font-UdemySansBold h3 font-black">Popular Topics</h2>
+                <div class="p-6 ">
+                    <!--auto-cols-[calc((100%-(1)*.8rem)/2)]-->
+                    <Slide class="grid-rows-2 gap-2">
+                        <template v-for="(row, index) in model.topics" :key="row.id">
+                            <div class="border border-gray-300 hover:bg-slate-50 transition-opacity py-4 px-20 text-center">
+                                <Link class="my-5" :href="row.link">
+                                <p class="font-UdemySansBold">{{ row.title }}</p>
+                                </Link>
+                            </div>
+                        </template>
+                    </Slide>
+                </div>
+            </section>
+
         </main>
     </Layout>
 </template>
