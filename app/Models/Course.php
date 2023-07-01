@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRelationships;
 
     public function getRouteKeyName()
     {
@@ -16,29 +18,37 @@ class Course extends Model
     }
 
     //Relationships
-    protected $with = ['subCategory', 'instructor', 'category'];
+    protected $with = ['instructor', 'topic', 'subCategory', 'category'];
 
-
-    public function subCategory()
-    {
-        return $this->belongsTo(SubCategory::class);
-    }
 
     public function instructor()
     {
         return $this->belongsTo(User::class, 'instructor_id');
     }
 
+    public function topic()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
+    }
+
+
+    public function subCategory()
+    {
+        return $this->hasOneThrough(SubCategory::class, Topic::class, 'id', 'id', 'topic_id', 'sub_category_id');
+    }
+
     public function category()
-    {  //https://github.com/laravel/ideas/issues/1170#issuecomment-851409037
-        return $this->hasOneThrough(Category::class, SubCategory::class, 'id', 'id', 'sub_category_id', 'category_id');
+    {
+        return $this->hasOneDeepFromReverse(
+            (new Category())->courses()
+        );
     }
 
     //Attributes
     protected function link(): Attribute
     {
         return Attribute::make(
-            get: fn () => route('course.show', ['course' => $this->slug])
+            get: fn () => route('courses.show', ['course' => $this->slug])
         );
     }
 }
