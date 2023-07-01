@@ -10,6 +10,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Resources\SubCategoryResource;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\TopicController;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 
@@ -34,15 +35,19 @@ Route::get('/', function () {
 
 
 
-Route::prefix('/courses/{category}')->controller(CategoryController::class)->name('category.')->group(function () {
+Route::prefix('/courses/{category}')->controller(CategoryController::class)->name('categories.')->group(function () {
    Route::get('/', 'show')->name('show');
 });
 
-Route::prefix('/courses/{subCategory}')->controller(SubCategoryController::class)->name('subCategory.')->group(function () {
+Route::prefix('/courses/{subCategory}')->controller(SubCategoryController::class)->name('subCategories.')->group(function () {
    Route::get('/', 'show')->name('show');
 });
 
-Route::prefix('/course')->controller(CourseController::class)->name('course.')->group(function () {
+Route::prefix('/topics/{topic}')->controller(TopicController::class)->name('topics.')->group(function () {
+   Route::get('/', 'show')->name('show');
+});
+
+Route::prefix('/course')->controller(CourseController::class)->name('courses.')->group(function () {
    Route::get('/{course}', 'show')->name('show');
 });
 
