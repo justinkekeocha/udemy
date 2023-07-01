@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('slug')->unique();
 
-            $table->foreignId('sub_category_id')
+            $table->foreignId('topic_id')
                 ->constrained();
             $table->foreignId('instructor_id')
                 ->constrained('users');
