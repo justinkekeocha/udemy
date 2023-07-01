@@ -39,9 +39,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category = new CategoryResource($category);
-        $courses = CourseResource::collection($category->courses);
-        return Inertia::render("Category/Show", compact('category', 'courses'));
+        $model = $category;
+        $model = new CategoryResource($model);
+        $courses = CourseResource::collection($model->courses);
+        return Inertia::render("Category/Show", compact('model', 'courses'));
     }
 
     /**
