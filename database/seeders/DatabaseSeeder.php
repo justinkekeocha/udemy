@@ -10,6 +10,7 @@ use App\Models\Topic;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
       // ]);
 
       //Makes data consistent for each seeding
+      //https://github.com/fzaninotto/Faker#seeding-the-generator
       Factory::create()->seed(1234);
 
       User::factory(10)->create();
@@ -47,7 +49,10 @@ class DatabaseSeeder extends Seeder
          ->sequence(fn (Sequence $sequence) => ['category_id' => Category::all()->random()])
          ->create();
 
-      Topic::factory(128)
+      //Reset faker Instance to get more word(max is 182)
+      fake()->unique($reset = true)->word();
+
+      Topic::factory(320)
          ->sequence(fn (Sequence $sequence) => ['sub_category_id' => SubCategory::all()->random()])
          ->create();
 
