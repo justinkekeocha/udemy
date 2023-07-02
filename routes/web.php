@@ -2,17 +2,18 @@
 
 use Inertia\Inertia;
 use App\Models\Course;
+use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\CategoryResource;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TopicController;
 use App\Http\Controllers\CourseController;
 use App\Http\Resources\SubCategoryResource;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\TopicController;
-use App\Http\Resources\CategoryResource;
-use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,14 @@ use App\Models\Category;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+$array = Category::all('id')->toArray();
+
+$mapped = Arr::mapWithKeys($array, function (array $item, int $key) {
+   return [$key => ['sknfksnf' => $item['id']]];
+});
+
+//dd($mapped);
 
 Route::get('/', function () {
    //$subCategories = SubCategoryResource::collection(SubCategory::all()->where('category_id', 1));
