@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   {{-- Used by ziggy--}}
   @routes
-  @vite('resources/css/app.css')
+  {{-- https://laravel.com/docs/10.x/vite#loading-your-scripts-and-styles --}}
   @vite('resources/js/app.js')
   @inertiaHead
 </head>
