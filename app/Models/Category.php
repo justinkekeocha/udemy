@@ -18,8 +18,6 @@ class Category extends Model
     }
 
     //Relationships
-    protected $with = ['subCategories', 'topics'];
-
     public function subCategories()
     {
         return $this->hasMany(SubCategory::class);

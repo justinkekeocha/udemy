@@ -18,7 +18,10 @@ class Course extends Model
     }
 
     //Relationships
-    protected $with = ['instructor', 'topic', 'subCategory', 'category'];
+    //Eager load only first parent relationships else there will be high chance of recursive loading and error
+    protected $with = ['instructor', 'topic',];
+
+    //protected $with = ['instructor', 'topic'];
 
 
     public function instructor()
@@ -28,7 +31,7 @@ class Course extends Model
 
     public function topic()
     {
-        return $this->belongsTo(SubCategory::class, 'sub_category_id');
+        return $this->belongsTo(Topic::class);
     }
 
 
