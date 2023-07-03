@@ -1,13 +1,22 @@
 <script setup>
-import Popover from "../Components/Popover.vue";
-import { useCategoryStore } from "../Stores/CategoryStore";
-import { useSubCategoryStore } from "../Stores/SubCategoryStore";
+import Popover from "@/Components/Popover.vue";
+import { useCategoryStore } from "@/Stores/CategoryStore";
+import { useSubCategoryStore } from "@/Stores/SubCategoryStore";
+import { useTopicStore } from "@/Stores/TopicStore";
+import Dropdown from "./Dropdown.vue";
+import { onMounted } from 'vue'
 
 const categoryStore = useCategoryStore();
 categoryStore.getCategories();
 
 const subCategoryStore = useSubCategoryStore();
 subCategoryStore.getSubCategories();
+
+const topicStore = useTopicStore();
+topicStore.getTopics()
+
+
+
 </script>
 
 <template>
@@ -39,14 +48,14 @@ subCategoryStore.getSubCategories();
                     data-popover-placement="bottom">
                     Categories
                 </button>
-                <Popover target="categories" class="text-sm text-gray-500">
+                <Popover target="categories" class="text-sm text-gray-500 h-5/6">
                     <ul
                         class="font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <template v-for="row in categoryStore.categories">
                             <li class="w-full px-4 py-2 hover:text-purple-600"
                                 :data-dropdown-toggle="'subCategory' + row.id + 'Dropdown'"
                                 data-dropdown-placement="right-start" data-dropdown-trigger="hover"
-                                data-dropdown-offset-distance="15" data-dropdown-offset-skidding="10">
+                                data-dropdown-offset-distance="13" data-dropdown-offset-skidding="-10">
                                 <Link :href="row.link" class="flex items-center justify-between">
                                 {{ row.title }}
                                 <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
@@ -59,23 +68,47 @@ subCategoryStore.getSubCategories();
                             </li>
                         </template>
                     </ul>
+
+                    <!--subCategory dropdown-->
+                    <template v-if="subCategoryStore.groupByCategory"
+                        v-for="(subCategory, index) in subCategoryStore.groupByCategory">
+                        <Dropdown class="h-5/6 border border-gray-200 shadow-sm" :id="'subCategory' + index + 'Dropdown'">
+                            <ul class="py-2  text-gray-700 dark:text-gray-200">
+                                <template v-for="row in subCategory">
+                                    <li :data-dropdown-toggle="'topic' + row.id + 'Dropdown'"
+                                        data-dropdown-placement="right-start" data-dropdown-trigger="hover"
+                                        data-dropdown-offset-distance="13" data-dropdown-offset-skidding="-10">
+                                        <Link :href="row.link"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{ row.title }}
+                                        </Link>
+
+                                    </li>
+                                </template>
+                            </ul>
+                        </Dropdown>
+                    </template>
+                    <!--Topics dropdown-->
+                    <template v-if="topicStore.groupBySubCategory" v-for="(topic, index) in topicStore.groupBySubCategory"
+                        :key="topic.id">
+
+                        <Dropdown class="h-5/6 border border-gray-200 shadow-sm" :id="'topic' + index + 'Dropdown'">
+
+                            <ul class="py-2  text-gray-700 dark:text-gray-200">
+                                <template v-for="item in topic">
+                                    <li>
+                                        <Link :href="item.link"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        {{ item.title }}
+                                        </Link>
+                                    </li>
+                                </template>
+                            </ul>
+                        </Dropdown>
+                    </template>
+
                 </Popover>
 
-                <template v-if="subCategoryStore.groupedSubCategories"
-                    v-for="(subCategory, index) in subCategoryStore.groupedSubCategories">
-                    <div :id="'subCategory' + index + 'Dropdown'"
-                        class="z-50 hidden bg-white divide-y divide-gray-100 shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2  text-gray-700 dark:text-gray-200">
-                            <li v-for="row in subCategory">
-                                <Link :href="row.link"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                {{ row.title }}
-                                </Link>
-
-                            </li>
-                        </ul>
-                    </div>
-                </template>
 
 
                 <div class="relative h-[3.0rem] grow order-1 md:order-none w-full md:w-auto">
