@@ -1,10 +1,12 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Topic;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Arr;
+use App\Http\Resources\TopicResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\CategoryResource;
@@ -26,20 +28,13 @@ use App\Http\Controllers\SubCategoryController;
 |
 */
 
-$array = Category::all('id')->toArray();
-
-$mapped = Arr::mapWithKeys($array, function (array $item, int $key) {
-   return [$key => ['sknfksnf' => $item['id']]];
-});
-
-//dd($mapped);
-
 Route::get('/', function () {
-   //$subCategories = SubCategoryResource::collection(SubCategory::all()->where('category_id', 1));
-   $categories = CategoryResource::collection(Category::all());
-   $subCategories = SubCategoryResource::collection(SubCategory::all());
-   $courses =  CourseResource::collection(Course::all());
-   return Inertia::render("Home", compact('categories', 'subCategories', 'courses'));
+   $categories = CategoryResource::collection(Category::with(['subCategories', 'topics'])->get());
+   // $subCategories = SubCategoryResource::collection(SubCategory::all());
+   // $courses =  CourseResource::collection(Course::all());
+   // $topics = TopicResource::collection(Topic::all());
+   // return Inertia::render("Home", compact('categories', 'subCategories', 'courses', 'topics'));
+   return Inertia::render("Home", compact('categories'));
 })->name('home');
 
 
