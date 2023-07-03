@@ -1,4 +1,6 @@
 import "./bootstrap";
+//https://laravel.com/docs/10.x/vite#configuring-vite
+import "../css/app.css";
 import { createApp, h } from "vue";
 import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
 import Layout from "/resources/js/Components/Layout.vue";
