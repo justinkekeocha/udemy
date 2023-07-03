@@ -19,6 +19,8 @@ class TopicResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'link' => $this->link,
+            'sub_category_id' => $this->sub_category_id,
+            'subCategory' => $this->subCategory,
         ];
     }
 }
