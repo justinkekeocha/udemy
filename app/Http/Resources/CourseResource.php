@@ -26,11 +26,12 @@ class CourseResource extends JsonResource
             'inflated_price' => number_format($this->price * 13),
             'link' => $this->link,
             'topic_id' => $this->topic_id,
-            'sub_category_id' => $this->subCategory->id,
-            'category_id' => $this->category->id,
-            'category' => new CategoryResource($this->category),
-            'subCategory' => new SubCategoryResource($this->subCategory),
+            'topic' => $this->topic,
+            'sub_category_id' => $this->topic->subCategory->id,
+            'category_id' => $this->topic->subCategory->category->id,
             'instructor' => new UserResource($this->instructor),
+            'subCategory' => new SubCategoryResource($this->topic->subCategory),
+            'category' => new CategoryResource($this->topic->subCategory->category),
         ];
     }
 }
