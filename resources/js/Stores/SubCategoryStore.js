@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
-import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
+import { group } from "radash";
 
-export const useSubCategoryStore = defineStore("subCategoryStore", {
+export const useSubCategoryStore = defineStore("subCategory", {
   // arrow function recommended for full type inference
   state: () => {
     return {
       subCategories: null,
-      groupedSubCategories: null,
+      groupByCategory: null,
     };
   },
   actions: {
@@ -14,9 +14,9 @@ export const useSubCategoryStore = defineStore("subCategoryStore", {
       try {
         const response = await axios.get(route("subCategories.index"));
         this.subCategories = response.data;
-        this.groupedSubCategories = await useGroupArrayByKey(
-          response.data,
-          "category_id"
+        this.groupByCategory = await group(
+          this.subCategories,
+          (f) => f.category_id
         );
       } catch (error) {
         console.error(error);
