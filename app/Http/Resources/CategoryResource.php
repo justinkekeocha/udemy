@@ -15,13 +15,16 @@ class CategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //For eager loading children relationships
+        //Since children relationships are not defined by default on the model
+        //https://laravel.com/docs/10.x/eloquent-resources#conditional-relationships
         return [
             'id' => $this->id,
             'title' => $this->title,
             'link' => $this->link,
             'image' => $this->image,
-            'subCategories' => SubCategoryResource::collection($this->subCategories),
-            'topics' => TopicResource::collection($this->topics),
+            'subCategories' => SubCategoryResource::collection($this->whenLoaded('subCategories')),
+            'topics' => TopicResource::collection($this->whenLoaded('topics')),
         ];
     }
 }
