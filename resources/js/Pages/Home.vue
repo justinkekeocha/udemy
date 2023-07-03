@@ -6,12 +6,14 @@ import CarouselControls from '../Components/Carousels/CarouselControls.vue'
 import Card1 from "../Components/Cards/Card1.vue";
 import { Link } from '@inertiajs/vue3';
 import CoursesSlide from "../Components/Slides/CoursesSlide.vue";
+import { useSubCategoryStore } from "@/Stores/SubCategoryStore";
+import { useTopicStore } from "@/Stores/TopicStore";
+import { useCourseStore } from "@/Stores/CourseStore";
 
+import { onMounted } from 'vue'
 
 const props = defineProps({
     categories: Object,
-    subCategories: Object,
-    courses: Object,
 });
 
 //Get on the first subCategory
@@ -21,14 +23,21 @@ const props = defineProps({
 
 // console.log(useGroupArrayByKey(props.subCategories, "category_id"))
 
-//Group subCategories according to category_id
-const groupSubcategories = useGroupArrayByKey(props.subCategories, "category_id")
-
-//Group courses according to subCategory
-const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_category_id');
 
 
+// onMounted(async () => {
+//     const topicStore = useTopicStore();
+//     await topicStore.getTopics()
+//     console.log(topicStore.topics)
+// })
+const subCategoryStore = useSubCategoryStore();
+subCategoryStore.getSubCategories();
 
+const topicStore = useTopicStore();
+topicStore.getTopics()
+
+const courseStore = useCourseStore();
+courseStore.getCourses()
 </script>
 
 <template>
@@ -113,18 +122,22 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
             <div class="mb-1">
                 <ul class="flex flex-wrap -mb-px text-base font-bold text-center" data-tabs-toggle="#coursesTab"
                     role="tablist">
-                    <li class="mr-2" role="presentation" v-for="(row, index) in groupSubcategories[1]" :key="index">
-                        <button :class="{
-                            'inline-block p-4 text-gray-500 aria-selected:text-gray-950': true,
-                        }" :data-tabs-target="'#' + row.title + '-tab'" type="button" role="tab">
-                            {{ row.title }}
-                        </button>
-                    </li>
+                    <template v-if="subCategoryStore.groupByCategory"
+                        v-for="(row, index) in subCategoryStore.groupByCategory[6]" :key="index">
+                        <li class="mr-2" role="presentation">
+                            <button :class="{
+                                'inline-block p-4 text-gray-500 aria-selected:text-gray-950': true,
+                            }" :data-tabs-target="'#' + row.title + '-tab'" type="button" role="tab">
+                                {{ row.title }}
+                            </button>
+                        </li>
+                    </template>
                 </ul>
             </div>
             <div id="coursesTab" class="border border-stone-400">
                 <!-- Loop through subcategories-->
-                <template v-for="(row, index) in groupSubcategories[1]">
+                <template v-if="subCategoryStore.groupByCategory"
+                    v-for="(row, index) in subCategoryStore.groupByCategory[6]">
                     <div class="hidden p-3 md:p-10" :id="row.title + '-tab'" role="tabpanel">
                         <h2 class="font-UdemySansBold text-2xl tracking-tight">
                             Expand your career opportunities with {{ row.title }}
@@ -140,10 +153,13 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                         <Button1>Explore {{ row.title }}</Button1>
                         </Link>
                         <!-- Get only courses that belong to that subcategory-->
-                        <CoursesSlide :courses="groupCoursesbySubCategory[
-                            row.id
-                        ]">
-                        </CoursesSlide>
+                        <template v-if="courseStore.groupBySubCategory">
+                            <CoursesSlide :courses="courseStore.groupBySubCategory[
+                                row.id
+                            ]">
+                            </CoursesSlide>
+                        </template>
+
                     </div>
                 </template>
             </div>
@@ -187,9 +203,12 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
         <section class="px-5 md:px-10 py-14 bg-white">
             <h2 class="font-UdemySansBold text-2xl leading-5 tracking-tight mb-9">Students are viewing
             </h2>
-            <CoursesSlide :courses="groupCoursesbySubCategory[
-                1
-            ]"></CoursesSlide>
+            <template v-if="courseStore.groupBySubCategory">
+                <CoursesSlide :courses="courseStore.groupBySubCategory[
+                    1
+                ]">
+                </CoursesSlide>
+            </template>
         </section>
 
         <!--Categories section-->
@@ -220,7 +239,8 @@ const groupCoursesbySubCategory = useGroupArrayByKey(props.courses, 'sub_categor
                 <template v-for="row in categories.slice(0, 4)">
                     <div class="col-span-12 md:col-span-3">
                         <h3 class="text-xl">{{ row.title }}</h3>
-                        <template v-for="row in groupSubcategories[row.id].slice(0, 2)">
+                        <template v-if="topicStore.groupByCategory"
+                            v-for="row in topicStore.groupByCategory[row.id].slice(0, 2)">
                             <Link :href="row.link">
                             <p class="underline font-bold  text-violet-800 mb-1">{{ row.title }}</p>
                             </Link>
