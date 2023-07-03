@@ -21,9 +21,16 @@ class Topic extends Model
     }
 
     //Relationships
+    protected $with = ['subCategory'];
+
     public function category(): HasOneThrough
     {
         return $this->hasOneThrough(Category::class, SubCategory::class, 'id', 'id', 'sub_category_id', 'category_id');
+    }
+
+    public function subCategory(): BelongsTo
+    {
+        return $this->belongsTo(SubCategory::class);
     }
     public function courses(): HasMany
     {
