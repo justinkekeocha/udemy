@@ -7,7 +7,10 @@ defineProps(['title', 'description'])
 //https://flowbite.com/docs/getting-started/vue/#data-attributes
 // initialize components based on data attribute selectors
 onMounted(() => {
-    initFlowbite();
+    setTimeout(async () => {
+        await initFlowbite();
+    }, 1000);
+
 })
 </script>
 
