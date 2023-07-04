@@ -19,7 +19,7 @@ class Course extends Model
 
     //Relationships
     //Eager load only first parent relationships else there will be high chance of recursive loading and error
-    protected $with = ['instructor', 'topic',];
+    protected $with = ['instructor', 'topic'];
 
     //protected $with = ['instructor', 'topic'];
 
