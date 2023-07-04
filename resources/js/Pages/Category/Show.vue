@@ -6,7 +6,7 @@ import Carousel from '../../Components/Carousels/Carousel.vue';
 import StarRating from '../../Components/StarRating.vue'
 import Slide from '../../Components/Slides/Slide.vue'
 import SlideControls from '../../Components/Slides/SlideControls.vue';
-const props = defineProps({ model: Object, courses: Object })
+const props = defineProps({ model: Object, courses: Object, topics: Object, instructors: Object })
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 const coursesTab = ref([
     {
@@ -112,15 +112,30 @@ const coursesTab = ref([
                 </div>
             </section>
 
-            <section>
+            <section class="mb-10">
                 <h2 class="font-UdemySansBold h3 font-black">Popular Topics</h2>
-                <div class="p-6 ">
+                <div class="p-1">
                     <!--auto-cols-[calc((100%-(1)*.8rem)/2)]-->
-                    <Slide class="grid-rows-2 gap-2">
+                    <Slide class="grid-rows-2 !gap-2">
                         <template v-for="(row, index) in model.topics" :key="row.id">
                             <div class="border border-gray-300 hover:bg-slate-50 transition-opacity py-4 px-20 text-center">
                                 <Link class="my-5" :href="row.link">
                                 <p class="font-UdemySansBold">{{ row.title }}</p>
+                                </Link>
+                            </div>
+                        </template>
+                    </Slide>
+                </div>
+            </section>
+
+            <section class="mb-10">
+                <h2 class="font-UdemySansBold h3 font-black">Popular Instructors</h2>
+                <div class="p-1">
+                    <Slide class="grid-rows-1 gap-4">
+                        <template v-for="(row, index) in instructors" :key="row.id">
+                            <div class="border border-gray-300 hover:bg-slate-50 transition-opacity py-4 px-20 text-center">
+                                <Link class="my-5" :href="row.link">
+                                <p class="font-UdemySansBold">{{ row.name }}</p>
                                 </Link>
                             </div>
                         </template>
