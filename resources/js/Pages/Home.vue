@@ -31,13 +31,8 @@ const props = defineProps({
 //     console.log(topicStore.topics)
 // })
 const subCategoryStore = useSubCategoryStore();
-subCategoryStore.getSubCategories();
-
 const topicStore = useTopicStore();
-topicStore.getTopics()
-
 const courseStore = useCourseStore();
-courseStore.getCourses()
 </script>
 
 <template>
