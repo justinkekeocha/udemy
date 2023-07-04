@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+
 
 class Category extends Model
 {
@@ -32,6 +32,26 @@ class Category extends Model
     {
         //https://github.com/staudenmeir/eloquent-has-many-deep#hasmany
         return $this->hasManyDeep(Course::class, [SubCategory::class, Topic::class]);
+    }
+
+    public function instructors()
+    {
+        return $this->hasManyDeep(
+            User::class,
+            [SubCategory::class, Topic::class, Course::class],
+            [
+                'category_id',
+                'sub_category_id',
+                'topic_id',
+                'id'
+            ],
+            [
+                'id',
+                'id',
+                'id',
+                'instructor_id'
+            ]
+        )->distinct();
     }
 
     //Attributes
