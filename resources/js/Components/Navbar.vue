@@ -16,7 +16,6 @@ const topicStore = useTopicStore();
 topicStore.getTopics()
 
 
-
 </script>
 
 <template>
@@ -44,72 +43,77 @@ topicStore.getTopics()
             <!--md:gap-x-5-->
             <div class="flex hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
                 id="navbar-cta">
-                <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-offset="25"
+                <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-offset="10"
                     data-popover-placement="bottom">
                     Categories
                 </button>
-                <Popover target="categories" class="text-sm text-gray-500 h-5/6">
+
+                <Popover target="categories" class="text-sm text-gray-500 h-5/6 w-32 md:w-64">
                     <ul
                         class="font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <template v-for="row in categoryStore.categories">
-                            <li class="w-full px-4 py-2 hover:text-purple-600"
-                                :data-dropdown-toggle="'subCategory' + row.id + 'Dropdown'"
+                        <template v-if="categoryStore.categories" v-for="(item, index) in categoryStore.categories">
+                            <li :data-dropdown-toggle="'subCategory' + item.id + 'Dropdown'"
                                 data-dropdown-placement="right-start" data-dropdown-trigger="hover"
-                                data-dropdown-offset-distance="13" data-dropdown-offset-skidding="-10">
-                                <Link :href="row.link" class="flex items-center justify-between">
-                                {{ row.title }}
-                                <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                </Link>
+                                data-dropdown-offset-distance="13" data-dropdown-offset-skidding="-9">
+                                <div class="flex items-center justify-between w-full py-2 hover:text-purple-600">
+                                    <Link :href="item.link">
+                                    {{ item.title }}
+                                    </Link>
+                                    <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
                             </li>
                         </template>
                     </ul>
-
-                    <!--subCategory dropdown-->
-                    <template v-if="subCategoryStore.groupByCategory"
-                        v-for="(subCategory, index) in subCategoryStore.groupByCategory">
-                        <Dropdown class="h-5/6 border border-gray-200 shadow-sm" :id="'subCategory' + index + 'Dropdown'">
-                            <ul class="py-2  text-gray-700 dark:text-gray-200">
-                                <template v-for="row in subCategory">
-                                    <li :data-dropdown-toggle="'topic' + row.id + 'Dropdown'"
+                    <!--subcategories dropdown-->
+                    <template v-if="categoryStore.categories" v-for="(item, index) in categoryStore.categories">
+                        <Dropdown class="h-full border border-gray-200 shadow-sm w-32 md:w-64"
+                            :id="'subCategory' + item.id + 'Dropdown'">
+                            <ul class=" text-gray-700 px-3 py-2">
+                                <template v-if="subCategoryStore.groupByCategory"
+                                    v-for="(item, index) in subCategoryStore.groupByCategory[item.id]">
+                                    <li :data-dropdown-toggle="'topic' + item.id + 'Dropdown'"
                                         data-dropdown-placement="right-start" data-dropdown-trigger="hover"
-                                        data-dropdown-offset-distance="13" data-dropdown-offset-skidding="-10">
-                                        <Link :href="row.link"
-                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{ row.title }}
-                                        </Link>
-
+                                        data-dropdown-offset-distance="0" data-dropdown-offset-skidding="-9">
+                                        <div class="flex items-center justify-between w-full py-2 hover:text-purple-600">
+                                            <Link :href="item.link">
+                                            {{ item.title }}
+                                            </Link>
+                                            <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
                                     </li>
+                                    <Dropdown class="h-full border border-gray-200 shadow-sm w-32 md:w-64"
+                                        :id="'topic' + item.id + 'Dropdown'">
+                                        <ul class="text-gray-700 px-3 py-2">
+                                            <li class="font-UdemySansBold  py-2">Popular topics</li>
+                                            <template v-if="topicStore.groupBySubCategory"
+                                                v-for="(item, index) in topicStore.groupBySubCategory[item.id]">
+                                                <li>
+                                                    <div
+                                                        class="flex items-center justify-between w-full  py-2 hover:text-purple-600">
+                                                        <Link :href="item.link">
+                                                        {{ item.title }}
+                                                        </Link>
+                                                    </div>
+                                                </li>
+
+                                            </template>
+                                        </ul>
+                                    </Dropdown>
                                 </template>
                             </ul>
                         </Dropdown>
                     </template>
-                    <!--Topics dropdown-->
-                    <template v-if="topicStore.groupBySubCategory" v-for="(topic, index) in topicStore.groupBySubCategory"
-                        :key="topic.id">
-
-                        <Dropdown class="h-5/6 border border-gray-200 shadow-sm" :id="'topic' + index + 'Dropdown'">
-
-                            <ul class="py-2  text-gray-700 dark:text-gray-200">
-                                <template v-for="item in topic">
-                                    <li>
-                                        <Link :href="item.link"
-                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{ item.title }}
-                                        </Link>
-                                    </li>
-                                </template>
-                            </ul>
-                        </Dropdown>
-                    </template>
-
                 </Popover>
-
-
 
                 <div class="relative h-[3.0rem] grow order-1 md:order-none w-full md:w-auto">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -125,22 +129,24 @@ topicStore.getTopics()
                 </div>
 
                 <div class="flex flex-col md:flex-row md:items-center gap-4">
-                    <Link href="/" data-popover-target="udemyBusinessPopover" data-popover-offset="25"
+                    <Link href="/" data-popover-target="udemyBusinessPopover" data-popover-offset="10"
                         data-popover-placement="bottom">{{
                             $page.props.appName
                         }} Business</Link>
-                    <Link href="/" data-popover-target="teachPopover" data-popover-offset="25"
+                    <Link href="/" data-popover-target="teachPopover" data-popover-offset="10"
                         data-popover-placement="bottom">Teach on {{ $page.props.appName }}</Link>
                     <!--Popovers-->
                     <Popover target="udemyBusinessPopover" class="max-w-xs text-xl p-2 font-extrabold">
-                        <p class="mb-5">Get your team access to over 22,000 top Udemy courses, anytime, anywhere.
+                        <p class="mb-5">Get your team access to over 22,000 top Udemy courses, anytime,
+                            anywhere.
                         </p>
                         <Link href="#">
                         <Button2 class="!mb-0 w-full">Try Udemy Business</Button2>
                         </Link>
                     </Popover>
                     <Popover target="teachPopover" class="max-w-xs text-xl p-2 font-extrabold">
-                        <p class="mb-5">Turn what you know into an opportunity and reach millions around the world.
+                        <p class="mb-5">Turn what you know into an opportunity and reach millions around the
+                            world.
                         </p>
                         <Link href="#">
                         <Button2 class="!mb-0 w-full">Learn more</Button2>
