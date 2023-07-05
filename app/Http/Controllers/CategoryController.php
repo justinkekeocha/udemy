@@ -9,6 +9,7 @@ use App\Http\Resources\CategoryResource;
 use App\Models\Course;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\TopicResource;
+use App\Http\Resources\UserResource;
 
 class CategoryController extends Controller
 {
@@ -42,12 +43,13 @@ class CategoryController extends Controller
     {
         $model = $category;
         $model = new CategoryResource($model);
-        $topics = TopicResource::collection($model->topics);
-        $courses = CourseResource::collection($model->courses->take(4));
+        $topics = TopicResource::collection($model->topics->take(20));
+        $courses = CourseResource::collection($model->courses);
         //https://laravel.com/docs/10.x/eloquent-relationships#deferred-count-loading
         //https://laravel.com/docs/10.x/eloquent-relationships#lazy-eager-loading
-        $instructors =  $model->instructors->loadCount('instructedCourses');
-        return Inertia::render("Category/Show", compact('model', 'courses', 'topics', 'instructors'));
+        $instructors =  UserResource::collection($model->instructors->loadCount('instructedCourses'));
+
+        return Inertia::render("Courses/Show", compact('model', 'courses', 'topics', 'instructors'));
     }
 
     /**
