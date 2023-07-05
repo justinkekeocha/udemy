@@ -55,6 +55,10 @@ Route::prefix('/course')->controller(CourseController::class)->name('courses.')-
    Route::get('/{course}', 'show')->name('show');
 });
 
+Route::prefix('/user')->controller(UserController::class)->name('users.')->group(function () {
+   Route::get('/{user}', 'show')->name('show');
+});
+
 
 Route::prefix('/login')->controller(LoginController::class)->group(function () {
 
