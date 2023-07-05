@@ -32,7 +32,19 @@ class DatabaseSeeder extends Seeder
       //https://github.com/fzaninotto/Faker#seeding-the-generator
       Factory::create()->seed(1234);
 
-      User::factory(10)->create();
+      User::factory(10)
+         ->sequence(
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/31334738_a13c_3.jpg'],
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/31926668_94e7_6.jpg'],
+            ['image' => "https://img-c.udemycdn.com/user/75x75/9685726_67e7_4.jpg"],
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/7799204_2091_5.jpg'],
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/38516954_b11c_3.jpg'],
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/4466306_6fd8_3.jpg'],
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/8912846_1a61.jpg'],
+            ['image' => 'https://img-c.udemycdn.com/user/75x75/36921905_7a32_6.jpg'],
+         )
+         ->create();
+
 
       Category::factory(8)->sequence(
          ['image' => 'https://s.udemycdn.com/home/top-categories/lohp-category-design-v2.jpg'],
