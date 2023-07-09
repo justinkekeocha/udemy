@@ -23,6 +23,7 @@ class CourseFactory extends Factory
             'description' =>  fake()->text(),
             'price' => fake()->numberBetween(1000, 10000),
             'slug' => Str::slug($title, '-'),
+            'rating' => fake()->randomFloat(1, 3, 4.9),
 
         ];
     }
