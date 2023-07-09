@@ -7,15 +7,8 @@ import Dropdown from "./Dropdown.vue";
 import { onMounted } from 'vue'
 
 const categoryStore = useCategoryStore();
-categoryStore.getCategories();
-
 const subCategoryStore = useSubCategoryStore();
-subCategoryStore.getSubCategories();
-
 const topicStore = useTopicStore();
-topicStore.getTopics()
-
-
 </script>
 
 <template>
