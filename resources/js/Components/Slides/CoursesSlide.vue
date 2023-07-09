@@ -16,7 +16,10 @@ defineProps({ courses: Object })
                     </h3>
                     <p class="text-xs line-clamp-1 text-ellipsis text-gray-400">{{
                         row.instructor.name }}</p>
-                    <StarRating />
+                    <div class="flex">
+                        <StarRating :rating="row.rating" />
+                        <span class="text-gray-400 text-xs">(499,666) </span>
+                    </div>
                     <p class="mb-3 font-UdemySansBold font-black">₦{{ row.price }} <span
                             class="line-through text-gray-400 text-sm font-normal ms-1">₦{{
                                 row.inflated_price }}</span>
