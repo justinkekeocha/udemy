@@ -1,0 +1,63 @@
+name: Deploy Site on push
+on:
+  push:
+    branches:
+      - main
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    #https://kirschbaumdevelopment.com/insights/laravel-github-actions
+    #https://github.com/kirschbaum-development/laravel-test-runner-container
+    #Container has node built in already, so you can also run npm commands
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.2
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Cache Node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Composer Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: 🔨 Build Project
+        #Container above has Node/NPM/Yarn installed
+        run: |
+          npm install
+          npm run build    
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+
+      #https://github.com/marketplace/actions/http-request-action
+      - name: Make request to clear cache
+        id: clearCache
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://udemy.jaycode.dev/production/cache"
+          method: "GET"
+      - name: Show Response
+        run: |
+          echo ${{ fromJson(steps.clearCache.outputs.response) }}
