@@ -6,9 +6,11 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use App\Http\Resources\TopicResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\CourseResource;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Resources\CategoryResource;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TopicController;
@@ -80,4 +82,19 @@ Route::prefix('/login')->controller(LoginController::class)->group(function () {
       Route::post('/logout',  'logout')->name('logout');
       Route::patch('/change-password',  'changePassword')->name('change-password');
    });
+});
+
+Route::prefix('/production')->group(function () {
+   if (App::environment('production')) {
+      //this will reset cache
+      //https://dev.to/kenfai/laravel-artisan-cache-commands-explained-41e1
+      Route::get('/cache', function () {
+         Artisan::call('config:cache');
+         Artisan::call('route:cache');
+         Artisan::call('view:cache');
+         Artisan::call('event:cache');
+         Artisan::call('migrate:fresh --seed');
+         echo 'All cache cleared without flushing cache';
+      });
+   }
 });
