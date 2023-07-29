@@ -29,7 +29,7 @@ jobs:
         id: cache-node-modules
         uses: actions/cache@v3
         with:
-          path: vendor
+          path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -41,7 +41,7 @@ jobs:
         #Container above has Node/NPM/Yarn installed
         run: |
           npm install
-          npm run build    
+          npm run dev    
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
