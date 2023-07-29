@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      #- uses: actions/setup-node@v3
 
       - name: Cache Composer packages
         id: composer-cache
@@ -40,8 +40,11 @@ jobs:
 
       - name: 🔨 Build Project
         #Container above has Node/NPM/Yarn installed
-        run: |
-          npm install
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      -  run: |
+          npm ci
           npm run build   
 
       - name: 📂 Sync files
