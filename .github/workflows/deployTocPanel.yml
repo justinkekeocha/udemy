@@ -56,7 +56,6 @@ jobs:
             | # I added vendor to the exclude because it caused timeout in connection
             **/.git*
             **/.git*/**
-            **/node_modules/**
             **/vendor/**
 
       #https://github.com/marketplace/actions/http-request-action
