@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
-      #- uses: actions/setup-node@v3
 
       - name: Cache Composer packages
         id: composer-cache
@@ -39,7 +38,6 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: 🔨 Build Project
-        #Container above has Node/NPM/Yarn installed
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -54,6 +52,12 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
+          exclude:
+            | # I added vendor to the exclude because it caused timeout in connection
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/vendor/**
 
       #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
