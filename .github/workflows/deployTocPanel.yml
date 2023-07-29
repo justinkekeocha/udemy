@@ -41,7 +41,7 @@ jobs:
         #Container above has Node/NPM/Yarn installed
         run: |
           npm install
-          npm run build    
+          npm run production   
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
