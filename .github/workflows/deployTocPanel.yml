@@ -38,10 +38,11 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: 🔨 Build Project
+      - uses: actions/setup-node@v3
         #Container above has Node/NPM/Yarn installed
         run: |
           npm install
-          npm run production   
+          npm run build   
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
