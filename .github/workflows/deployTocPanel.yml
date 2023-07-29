@@ -46,12 +46,12 @@ jobs:
           npm run build   
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v3.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftps-legacy
           exclude:
             | # I added vendor to the exclude because it caused timeout in connection
             **/.git*
