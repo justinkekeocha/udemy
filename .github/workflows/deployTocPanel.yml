@@ -51,7 +51,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
           exclude:
             | # I added vendor to the exclude because it caused timeout in connection
             **/.git*
