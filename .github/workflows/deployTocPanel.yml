@@ -50,10 +50,10 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+          REMOTE_PORT: 21098
+          TARGET: "~/udemy.jaycode.dev/codebase"
           EXCLUDE: "/dist/, /node_modules/"
 
 
