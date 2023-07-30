@@ -61,7 +61,7 @@ jobs:
           source: "."
           target: "~/udemy.jaycode.dev/codebase"
          
-        #https://github.com/marketplace/actions/http-request-action
+      #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
         id: clearCache
         uses: fjogeleit/http-request-action@v1
