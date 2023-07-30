@@ -49,18 +49,15 @@ jobs:
           npm ci
           npm run build --if-present
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.4
         with:
-          server: ftpes://business22.web-hosting.com
-          username: ${{ secrets.FTP_USERNAME }}
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          exclude:
-            | # I added vendor to the exclude because it caused timeout in connection
-            **/.git*
-            **/.git*/**
-            **/vendor/barryvdh/laravel-debugbar/**
+          port: 21098
+          source: "/*"
+          target: ${{ secrets.REMOTE_TARGET }}
          
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
