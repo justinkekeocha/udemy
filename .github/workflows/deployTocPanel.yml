@@ -66,6 +66,7 @@ jobs:
         with:
           url: "https://udemy.jaycode.dev/production/cache"
           method: "GET"
+          timeout: 60000
       - name: Show Response
         run: |
           echo ${{ fromJson(steps.clearCache.outputs.response) }}
