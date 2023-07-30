@@ -50,14 +50,17 @@ jobs:
           npm run build --if-present
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v3.1.1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          ftp-server: sftp://business22.web-hosting.com::21098/udemy.jaycode.dev/codebase/
-          ftp-username: ${{ secrets.FTP_USERNAME }}
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
-          git-ftp-args: --insecure
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          exclude:
+            | # I added vendor to the exclude because it caused timeout in connection
+            **/.git*
+            **/.git*/**
          
-
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
         id: clearCache
