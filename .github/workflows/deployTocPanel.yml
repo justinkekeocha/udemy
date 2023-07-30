@@ -59,13 +59,10 @@ jobs:
           REMOTE_PORT: 21098
           TARGET: "~/udemy.jaycode.dev/codebase"
           EXCLUDE: "/dist/, /node_modules/"
+          # Add the HostKeyAlgorithms and PubkeyAcceptedAlgorithms lines to ~/.ssh/config
           SCRIPT_BEFORE: |
-            whoami
-            ls -al
-          SCRIPT_AFTER: |
-            whoami
-            ls -al
-            echo $RSYNC_STDOUT
+            echo "HostKeyAlgorithms +ssh-rsa" >> $HOME/.ssh/config
+            echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> $HOME/.ssh/config
 
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
