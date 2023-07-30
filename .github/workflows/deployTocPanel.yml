@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21098
-          source: "/*"
+          source: "."
           target: ${{ secrets.REMOTE_TARGET }}
          
         #https://github.com/marketplace/actions/http-request-action
