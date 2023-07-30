@@ -51,6 +51,10 @@ jobs:
 
       - name: 📂 Sync files
         uses: easingthemes/ssh-deploy@main
+        run: |
+          echo "HostKeyAlgorithms +ssh-rsa" >> $HOME/.ssh/config
+          echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> $HOME/.ssh/config
+        shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
