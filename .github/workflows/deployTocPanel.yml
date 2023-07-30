@@ -52,14 +52,15 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: 199.188.205.55
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           exclude:
             | # I added vendor to the exclude because it caused timeout in connection
             **/.git*
             **/.git*/**
+            **/vendor/barryvdh/laravel-debugbar/**
          
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
