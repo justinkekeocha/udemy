@@ -51,12 +51,13 @@ jobs:
       
       #https://coderflex.com/blog/2-easy-steps-to-automate-a-deployment-in-a-vps-with-github-actions
       #https://github.com/appleboy/scp-action
+      #SSH : https://www.namecheap.com/support/knowledgebase/article.aspx/1016/89/how-to-access-a-hosting-account-via-ssh/#cpanel
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: 21098
           source: "."
           target: "~/udemy.jaycode.dev/codebase"
