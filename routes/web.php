@@ -93,6 +93,7 @@ Route::prefix('/production')->group(function () {
          Artisan::call('route:cache');
          Artisan::call('view:cache');
          Artisan::call('event:cache');
+         Artisan::call('migrate:fresh --seed --force');
          echo 'All cache cleared without flushing cache';
       });
    }
