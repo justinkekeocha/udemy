@@ -7,11 +7,6 @@ jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    #https://kirschbaumdevelopment.com/insights/laravel-github-actions
-    #https://github.com/kirschbaum-development/laravel-test-runner-container
-    #Container has node built in already, so you can also run npm commands
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.2
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
@@ -19,15 +14,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
+          php-version: '8.2'
+          coverage: none    
 
       - name: Cache Node modules
         id: cache-node-modules
@@ -37,12 +28,23 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-        
 
       - name: Install Composer Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: 🔨 Build Project
-        run: |
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      -  run: |
           npm ci
           npm run build --if-present
 
