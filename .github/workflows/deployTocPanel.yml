@@ -48,7 +48,9 @@ jobs:
       -  run: |
           npm ci
           npm run build --if-present
-
+      
+      #https://coderflex.com/blog/2-easy-steps-to-automate-a-deployment-in-a-vps-with-github-actions
+      #https://github.com/appleboy/scp-action
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -57,7 +59,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21098
           source: "."
-          target: ${{ secrets.REMOTE_TARGET }}
+          target: "~/udemy.jaycode.dev/codebase"
          
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
