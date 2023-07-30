@@ -60,8 +60,12 @@ jobs:
           TARGET: "~/udemy.jaycode.dev/codebase"
           EXCLUDE: "/dist/, /node_modules/"
           SCRIPT_BEFORE: |
-            echo "HostKeyAlgorithms +ssh-rsa" >> /home/runner/.ssh/config
-            echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> /home/runner/.ssh/config
+            whoami
+            ls -al
+          SCRIPT_AFTER: |
+            whoami
+            ls -al
+            echo $RSYNC_STDOUT
 
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
