@@ -60,9 +60,8 @@ jobs:
           TARGET: "~/udemy.jaycode.dev/codebase"
           EXCLUDE: "/dist/, /node_modules/"
           SCRIPT_BEFORE: |
-            echo "HostKeyAlgorithms +ssh-rsa" >> ~/.ssh/config
-            echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-
+            ls -la
+            
         #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
         id: clearCache
