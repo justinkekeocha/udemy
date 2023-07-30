@@ -49,13 +49,6 @@ jobs:
           npm ci
           npm run build --if-present
 
-      - name: Create SSH key
-        run: |
-          mkdir -p  $HOME/.ssh/
-          echo "HostKeyAlgorithms +ssh-rsa" >> $HOME/.ssh/config
-          echo "PubkeyAcceptedAlgorithms +ssh-rsa" >> $HOME/.ssh/config
-        shell: bash
-
       - name: 📂 Sync files
         uses: easingthemes/ssh-deploy@main
         env:
