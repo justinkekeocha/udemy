@@ -52,7 +52,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v3.1.1
         with:
-          ftp-server: sftp://business22.web-hosting.com::21098/
+          ftp-server: sftp://business22.web-hosting.com::21098/udemy.jaycode.dev/codebase/
           ftp-username: ${{ secrets.FTP_USERNAME }}
           ftp-password: ${{ secrets.FTP_PASSWORD }}
           git-ftp-args: --insecure
