@@ -55,6 +55,7 @@ jobs:
           ftp-server: sftp://business22.web-hosting.com::21098/
           ftp-username: ${{ secrets.FTP_USERNAME }}
           ftp-password: ${{ secrets.FTP_PASSWORD }}
+          git-ftp-args: --insecure
          
 
         #https://github.com/marketplace/actions/http-request-action
