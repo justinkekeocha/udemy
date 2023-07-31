@@ -96,10 +96,5 @@ Route::prefix('/production')->group(function () {
          Artisan::call('migrate:fresh --seed --force');
          echo 'All cache cleared without flushing cache';
       });
-
-      // Route::get('/migrate-database', function () {
-      //    Artisan::call('migrate:fresh --seed --force');
-      //    echo 'Database migrated successfully';
-      // });
    }
 });
