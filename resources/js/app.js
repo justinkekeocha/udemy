@@ -8,6 +8,7 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/src/js/vue";
 import { createPinia } from "pinia";
 import Button1 from "../js/Components/Buttons/Button1.vue";
 import Button2 from "../js/Components/Buttons/Button2.vue";
+import PrimeVue from "primevue/config";
 
 createInertiaApp({
   resolve: (name) => {
@@ -26,6 +27,7 @@ createInertiaApp({
       .use(plugin)
       .use(ZiggyVue)
       .use(createPinia())
+      .use(PrimeVue)
       .component("Layout", Layout)
       .component("Head", Head)
       .component("Link", Link)
