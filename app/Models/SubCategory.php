@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class SubCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRelationships;
 
     public function getRouteKeyName()
     {
@@ -34,11 +35,29 @@ class SubCategory extends Model
         return $this->hasManyThrough(Course::class, Topic::class);
     }
 
+    public function instructors()
+    {
+        return $this->hasManyDeep(
+            User::class,
+            [Topic::class, Course::class],
+            [
+                'sub_category_id',
+                'topic_id',
+                'id'
+            ],
+            [
+                'id',
+                'id',
+                'instructor_id'
+            ]
+        )->distinct();
+    }
+
     //Attributes
     protected function link(): Attribute
     {
         return Attribute::make(
-            get: fn () => route('subCategories.show', ['subCategory' => $this->slug])
+            get: fn () => route('subCategories.show', ['category' => $this->category->slug, 'subCategory' => $this->slug])
         );
     }
 }
