@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('price');
             $table->string('image');
             $table->string('slug')->unique();
-            $table->decimal('rating', 2, 1);
 
             $table->foreignId('topic_id')
                 ->constrained();
