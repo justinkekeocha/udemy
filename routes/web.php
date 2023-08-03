@@ -88,6 +88,7 @@ Route::prefix('/login')->controller(LoginController::class)->group(function () {
 Route::prefix('/production')->group(function () {
    if (App::environment('production')) {
       //this will reset cache
+      //https://github.com/laravel/framework/issues/2501#issuecomment-663833933
       //https://dev.to/kenfai/laravel-artisan-cache-commands-explained-41e1
       Route::get('/cache', function () {
          Artisan::call('optimize');
