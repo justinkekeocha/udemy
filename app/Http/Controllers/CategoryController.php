@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\TopicResource;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 
 class CategoryController extends Controller
 {
@@ -49,6 +50,7 @@ class CategoryController extends Controller
         //https://laravel.com/docs/10.x/eloquent-relationships#lazy-eager-loading
         $instructors =  UserResource::collection($model->instructors->loadCount('instructedCourses'));
 
+        // dd($courses->take(20));
         return Inertia::render("Courses/Show", compact('model', 'courses', 'topics', 'instructors'));
     }
 
