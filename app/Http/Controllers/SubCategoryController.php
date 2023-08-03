@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\TopicResource;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\SubCategoryResource;
 use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Models\Category;
 
 class SubCategoryController extends Controller
 {
@@ -35,9 +42,17 @@ class SubCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubCategory $subCategory)
+    public function show(Category $category, SubCategory $subCategory)
     {
-        //
+        $model = $subCategory;
+        $model = new SubCategoryResource($model);
+        $topics = TopicResource::collection($model->topics->take(20));
+        $courses = CourseResource::collection($model->courses);
+        //https://laravel.com/docs/10.x/eloquent-relationships#deferred-count-loading
+        //https://laravel.com/docs/10.x/eloquent-relationships#lazy-eager-loading
+        $instructors =  UserResource::collection($model->instructors->loadCount('instructedCourses'));
+
+        return Inertia::render("Courses/Show", compact('model', 'courses', 'topics', 'instructors'));
     }
 
     /**
