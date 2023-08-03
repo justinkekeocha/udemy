@@ -6,6 +6,8 @@ import Carousel from '../../Components/Carousels/Carousel.vue';
 import StarRating from '../../Components/StarRating.vue'
 import Slide from '../../Components/Slides/Slide.vue'
 import SlideControls from '../../Components/Slides/SlideControls.vue';
+import DataView from 'primevue/dataview';
+
 const props = defineProps({ model: Object, courses: Object, topics: Object, instructors: Object })
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 const coursesTab = ref([
@@ -33,11 +35,20 @@ window.addEventListener("resize", debounce({ delay: 1000 }, () => {
 }));
 
 const ratingFilter = ref(null)
+const sortByFilter = ref('mostPopular')
 const filters = ref({ ratingFilter })
 
 const matchingCourses = computed(() => {
-    let filtered = props.courses.filter((course) => course.rating >= filters.value.ratingFilter)
-    //filtered = sort(filtered, f => f.rating, true)
+    let filtered = props.courses.filter((course) => course.rating >= ratingFilter.value)
+    if (sortByFilter.value == 'mostPopular') {
+        filtered = sort(filtered, f => f.ratings_count, true)
+    } else if (sortByFilter.value == 'highestRated') {
+        filtered = sort(filtered, f => f.rating, true)
+    } else if (sortByFilter.value == 'newest') {
+        filtered = sort(filtered, f => f.id, true)
+    }
+
+
     return filtered
 })
 
@@ -215,10 +226,11 @@ const matchingCourses = computed(() => {
                     </Button1>
                     <div class="flex flex-col border border-black h-16 ps-1 pt-1.5 w-44 group hover:bg-gray-100">
                         <label class="text-xs font-UdemySansBold ps-3">Sort by</label>
-                        <select class="border-none h-10 focus:border-black p-0 ps-3 group-hover:bg-gray-100 focus:ring-0">
-                            <option class="h-0">Most Popular</option>
-                            <option value="US">Highest Rated</option>
-                            <option value="CA">Newest</option>
+                        <select class="border-none h-10 focus:border-black p-0 ps-3 group-hover:bg-gray-100 focus:ring-0"
+                            v-model="sortByFilter">
+                            <option value="mostPopular">Most Popular</option>
+                            <option value="highestRated">Highest Rated</option>
+                            <option value="newest">Newest</option>
                         </select>
                     </div>
 
@@ -231,7 +243,7 @@ const matchingCourses = computed(() => {
                     <div class="grid grid-cols-4 gap-6">
                         <!--https://vuejs.org/guide/essentials/class-and-style.html#binding-to-arrays-->
                         <div class="transition-all duration-1000 ease-in-out delay-1000"
-                            :class="[showSideMenu ? 'col-span-1' : 'hidden']">
+                            :class="[showSideMenu ? 'col-span-3 md:col-span-1' : 'hidden']">
                             <hr>
                             <p class="font-UdemySansBold text-lg mb-8 ">Ratings</p>
                             <div class="flex flex-col gap-3">
@@ -266,48 +278,61 @@ const matchingCourses = computed(() => {
                             </div>
 
                         </div>
-                        <div :class="[showSideMenu ? 'col-span-3' : 'col-span-4']">
+                        <div :class="[showSideMenu ? 'col-span-1 md:col-span-3' : 'col-span-4']">
                             <div class="flex flex-col gap-0.5">
-                                <template v-for="row in matchingCourses">
-                                    <Link :href="row.link">
-                                    <div class="container">
-                                        <div class="grid grid-cols-12 gap-4">
-                                            <div class="col-span-4">
-                                                <div class="border border-stone-400 bg-zinc-900">
-                                                    <img class="block w-full h-auto align-middle hover:opacity-80 transition-opacity"
-                                                        :src="row.image">
-                                                </div>
-                                            </div>
-                                            <div class="col-span-8">
-                                                <div class="grid grid-cols-1 content-between max-w-lg">
-                                                    <div class="flex flex-col gap-1">
-                                                        <p class="font-UdemySansBold  mb-0">{{ row.title }}
-                                                        </p>
-                                                        <p class="line-clamp-2 text-ellipsis text-sm">{{ row.description }}
-                                                        </p>
-                                                        <p class="text-xs line-clamp-1 text-ellipsis text-neutral-500">By {{
-                                                            row.instructor.name }}</p>
 
-                                                        <div class="flex">
-                                                            <StarRating :rating="row.rating" />
-                                                        </div>
-
-                                                        <p class="text-neutral-500 text-xs">67 total hours . 410 lectures .
-                                                            All
-                                                            levels</p>
-
+                                <DataView :value="matchingCourses" paginator :rows="16" :pageLinkSize="3" :pt="{
+                                    paginator: {
+                                        pageButton: ({ props, state, context }) => ({
+                                            class: context.active ? 'bg-zinc-900' : undefined
+                                        })
+                                    }
+                                }" paginatorTemplate="PrevPageLink PageLinks CurrentPageReport  NextPageLink"
+                                    currentPageReportTemplate=" ...  {totalPages}">
+                                    <template #list="slotProps">
+                                        <Link :href="slotProps.data.link">
+                                        {{ slotProps.data.id }}
+                                        <div class="container">
+                                            <div class="grid grid-cols-12 gap-4">
+                                                <div class="col-span-4">
+                                                    <div class="border border-stone-400 bg-zinc-900">
+                                                        <img class="block w-full h-auto align-middle hover:opacity-80 transition-opacity"
+                                                            :src="slotProps.data.image">
                                                     </div>
+                                                </div>
+                                                <div class="col-span-8">
+                                                    <div class="grid grid-cols-1 content-between max-w-lg">
+                                                        <div class="flex flex-col gap-1">
+                                                            <p class="font-UdemySansBold  mb-0">{{ slotProps.data.title }}
+                                                            </p>
+                                                            <p class="line-clamp-2 text-ellipsis text-sm">{{
+                                                                slotProps.data.description }}
+                                                            </p>
+                                                            <p class="text-xs line-clamp-1 text-ellipsis text-neutral-500">
+                                                                By {{
+                                                                    slotProps.data.instructor.name }}</p>
 
+                                                            <div class="flex items-center">
+                                                                <StarRating :rating="slotProps.data.rating" />
+                                                                <span class="text-gray-400 text-xs">({{
+                                                                    slotProps.data.ratings_count
+                                                                }}) </span>
+                                                            </div>
+                                                            <p class="text-neutral-500 text-xs">67 total hours . 410
+                                                                lectures .
+                                                                All
+                                                                levels
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    </Link>
-                                    <hr>
-                                </template>
+                                        </Link>
+                                        <hr>
+                                    </template>
+                                </DataView>
                             </div>
-
-                            <v-pagination v-model="matchingCourses" :length="16" rounded="circle"></v-pagination>
                         </div>
                     </div>
                 </div>
@@ -319,3 +344,23 @@ const matchingCourses = computed(() => {
         </main>
     </Layout>
 </template>
+
+<style scoped>
+:deep(.p-paginator-current) {
+    @apply font-UdemySansBold text-sm me-5;
+}
+
+:deep(.p-paginator-page) {
+    @apply w-10 text-violet-800 font-UdemySansBold text-sm;
+}
+
+:deep(.p-paginator-prev),
+:deep(.p-paginator-next) {
+    @apply w-10 h-10 rounded-full border border-solid border-zinc-900;
+}
+
+:deep(.p-highlight::after) {
+    @apply content-[''] absolute block bottom-0 left-6 right-6 h-[0.15rem] bg-indigo-900;
+}
+</style>
+        
