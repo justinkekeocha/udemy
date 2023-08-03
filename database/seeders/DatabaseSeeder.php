@@ -8,9 +8,9 @@ use Faker\Factory;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Course;
+use App\Models\Rating;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Support\Arr;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
@@ -85,6 +85,10 @@ class DatabaseSeeder extends Seeder
             ['image' =>
             'https://img-c.udemycdn.com/course/480x270/950390_270f_3.jpg'],
          )
+         ->create();
+
+      Rating::factory(5000)
+         ->sequence(fn (Sequence $sequence) => ['course_id' => Course::all()->random()])
          ->create();
    }
 }
