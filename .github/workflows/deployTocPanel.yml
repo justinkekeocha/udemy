@@ -13,13 +13,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: "16.x"
       - name: Setup PHP
         #https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-          coverage: none    
+          php-version: "8.2"
+          coverage: none
 
       - name: Cache Node modules
         id: cache-node-modules
@@ -36,7 +36,7 @@ jobs:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-php-        
+            ${{ runner.os }}-php-
 
       - name: Install Composer Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -45,7 +45,7 @@ jobs:
         run: |
           npm ci
           npm run build --if-present
-      
+
       #https://coderflex.com/blog/2-easy-steps-to-automate-a-deployment-in-a-vps-with-github-actions
       #https://github.com/appleboy/scp-action
       #SSH : https://www.namecheap.com/support/knowledgebase/article.aspx/1016/89/how-to-access-a-hosting-account-via-ssh/#cpanel
@@ -58,7 +58,7 @@ jobs:
           port: 21098
           source: "."
           target: "~/udemy.jaycode.dev/codebase"
-         
+
       #https://github.com/marketplace/actions/http-request-action
       - name: Make request to clear cache
         id: clearCache
@@ -66,7 +66,7 @@ jobs:
         with:
           url: "https://udemy.jaycode.dev/production/cache"
           method: "GET"
-          timeout: 60000
+          timeout: 600000
       - name: Show Response
         run: |
           echo ${{ fromJson(steps.clearCache.outputs.response) }}
