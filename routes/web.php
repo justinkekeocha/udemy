@@ -39,15 +39,16 @@ Route::get('/', function () {
    return Inertia::render("Home", compact('categories'));
 })->name('home');
 
+Route::prefix('/courses/{category}')->group(function () {
+   Route::controller(CategoryController::class)->name('categories.')->group(function () {
+      Route::get('/', 'show')->name('show');
+   });
 
-
-Route::prefix('/courses/{category}')->controller(CategoryController::class)->name('categories.')->group(function () {
-   Route::get('/', 'show')->name('show');
+   Route::prefix('/{subCategory}')->controller(SubCategoryController::class)->name('subCategories.')->group(function () {
+      Route::get('/', 'show')->name('show');
+   });
 });
 
-Route::prefix('/courses/{subCategory}')->controller(SubCategoryController::class)->name('subCategories.')->group(function () {
-   Route::get('/', 'show')->name('show');
-});
 
 Route::prefix('/topics/{topic}')->controller(TopicController::class)->name('topics.')->group(function () {
    Route::get('/', 'show')->name('show');
@@ -89,12 +90,14 @@ Route::prefix('/production')->group(function () {
       //this will reset cache
       //https://dev.to/kenfai/laravel-artisan-cache-commands-explained-41e1
       Route::get('/cache', function () {
-         Artisan::call('config:cache');
-         Artisan::call('route:cache');
+         Artisan::call('optimize');
          Artisan::call('view:cache');
          Artisan::call('event:cache');
          Artisan::call('migrate:fresh --seed --force');
          echo 'All cache cleared without flushing cache';
       });
+   } else {
+      Artisan::call('optimize:clear');
+      Artisan::call('event:clear');
    }
 });
