@@ -50,12 +50,12 @@ Route::prefix('/courses/{category}')->group(function () {
 });
 
 
-Route::prefix('/topics/{topic}')->controller(TopicController::class)->name('topics.')->group(function () {
+Route::prefix('/topic/{topic}')->controller(TopicController::class)->name('topics.')->group(function () {
    Route::get('/', 'show')->name('show');
 });
 
-Route::prefix('/course')->controller(CourseController::class)->name('courses.')->group(function () {
-   Route::get('/{course}', 'show')->name('show');
+Route::prefix('/course/{course}')->controller(CourseController::class)->name('courses.')->group(function () {
+   Route::get('/', 'show')->name('show');
 });
 
 Route::prefix('/user')->controller(UserController::class)->name('users.')->group(function () {
@@ -94,7 +94,7 @@ Route::prefix('/production')->group(function () {
          Artisan::call('optimize');
          Artisan::call('view:cache');
          Artisan::call('event:cache');
-         Artisan::call('migrate:fresh --seed --force');
+         //Artisan::call('migrate:fresh --seed --force');
          echo 'All cache cleared without flushing cache';
       });
    } else {
