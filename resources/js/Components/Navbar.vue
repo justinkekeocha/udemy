@@ -27,7 +27,7 @@ const topicStore = useTopicStore();
                 </svg>
             </button>
 
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between p-4">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between p-2 md:p-4">
                 <Link href="/" class="flex items-center">
                 <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" class="h-8"
                     :alt="$page.props.appName + ' Logo'" />
