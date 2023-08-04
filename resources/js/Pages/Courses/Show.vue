@@ -291,7 +291,6 @@ const matchingCourses = computed(() => {
                                     currentPageReportTemplate=" ...  {totalPages}">
                                     <template #list="slotProps">
                                         <Link :href="slotProps.data.link">
-                                        {{ slotProps.data.id }}
                                         <div class="container">
                                             <div class="grid grid-cols-12 gap-4">
                                                 <div class="col-span-4">
