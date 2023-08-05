@@ -1,4 +1,5 @@
 <script setup>
+import StarRating from '../../Components/StarRating.vue'
 const props = defineProps({ model: Object, })
 //console.log(props.model.subCategory.link)
 </script>
@@ -39,15 +40,12 @@ const props = defineProps({ model: Object, })
                     <img class="object-contain h-full md:h-80 w-full" :src="model.image">
                     <div class="absolute flex flex-col items-center justify-center top-0 left-0 h-full w-full">
                         <div class="flex flex-col flex-grow items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="w-20 h-20 fill-white">
-                                <path fill-rule="evenodd"
-                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
-                                    clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="white" />
+                                <polygon points="40,30 70,50 40,70" fill="black" />
                             </svg>
-
                         </div>
-                        <div class=" flex items-end justify-center mb-4">
+                        <div class="flex items-end justify-center mb-2">
                             <p class="font-UdemySansBold">Preview this course</p>
                         </div>
 
@@ -56,7 +54,20 @@ const props = defineProps({ model: Object, })
 
             </div>
             <h1 class=" h2 font-UdemySansBold ">{{ model.title }}</h1>
-            <p>{{ model.description }}</p>
+            <p class="mb-5">{{ model.description }}</p>
+            <div class="flex items-center text-sm mb-2">
+                <StarRating :rating="model.rating" class="[&>*]:text-amber-200" />
+                <span class="text-violet-300 underline me-2">({{ model.ratings_count }} ratings) </span>
+                <span>18,278 students</span>
+            </div>
+            <p class="text-sm">Created by <span class="text-violet-300 underline">{{ model.instructor.name }}</span> </p>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+
+
         </section>
 
     </Layout>
