@@ -20,11 +20,9 @@ class CourseFactory extends Factory
         $title = trim(fake()->sentence(), '.');
         return [
             'title' => ucfirst($title),
-            'description' =>  fake()->text(),
+            'description' =>  fake()->paragraphs(8, true),
             'price' => fake()->numberBetween(1000, 10000),
             'slug' => Str::slug($title, '-'),
-
-
         ];
     }
 }
