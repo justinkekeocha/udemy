@@ -89,6 +89,7 @@ class DatabaseSeeder extends Seeder
 
       Rating::factory(5000)
          ->sequence(fn (Sequence $sequence) => ['course_id' => Course::all()->random()])
+         ->sequence(fn (Sequence $sequence) => ['user_id' => User::all()->random()])
          ->create();
    }
 }
