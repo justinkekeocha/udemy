@@ -80,7 +80,6 @@ const matchingCourses = computed(() => {
                             <CoursesSlide :courses="courses.slice(row.limit)"></CoursesSlide>
                         </div>
                     </template>
-
                 </div>
             </section>
 
