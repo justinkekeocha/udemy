@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CourseResource;
 use Inertia\Inertia;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\RatingResource;
 
 class CourseController extends Controller
 {
@@ -39,7 +40,9 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $model = new CourseResource($course);
-        return Inertia::render("Course/Show", compact('model'));
+        $related = CourseResource::collection(Course::related(['title' => $course->title])->get());
+        $ratings = RatingResource::collection($course->ratings);
+        return Inertia::render("Course/Show", compact('model', 'related', 'ratings'));
     }
 
     /**
