@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Casts\NumberFormat;
 use App\Models\Category;
+use App\Casts\NumberFormat;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -81,5 +82,14 @@ class Course extends Model
         return Attribute::make(
             get: fn () => number_format(filter_var($this->price, FILTER_SANITIZE_NUMBER_INT) * 13)
         );
+    }
+
+    public function scopeRelated(Builder $query, array $filters)
+    {
+        $explodeTitle = explode(' ', $filters['title']);
+        foreach ($explodeTitle as $index => $keyword) {
+            $query->orWhere('title', 'LIKE', '%' . $keyword . '%');
+        }
+        $query->limit(5);
     }
 }
