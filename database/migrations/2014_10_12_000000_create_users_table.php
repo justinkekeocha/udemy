@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
 
+            $table->string('about', 2000);
             $table->string('slug')->unique();
             $table->string('image');
 
