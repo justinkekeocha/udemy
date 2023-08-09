@@ -16,9 +16,12 @@ class RatingFactory extends Factory
      */
     public function definition(): array
     {
+        $date = fake()->dateTimeBetween('-52 weeks', '-1 week');
         return [
             'rating' => fake()->randomFloat(1, 3, 5),
             'review' => fake()->text(),
+            'created_at' => $date,
+            'updated_at' => $date,
         ];
     }
 }

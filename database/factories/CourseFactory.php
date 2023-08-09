@@ -18,11 +18,14 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         $title = trim(fake()->sentence(), '.');
+        $date = fake()->dateTimeBetween('-52 weeks', '-1 week');
         return [
             'title' => ucfirst($title),
             'description' =>  fake()->paragraphs(8, true),
             'price' => fake()->numberBetween(1000, 10000),
             'slug' => Str::slug($title, '-'),
+            'created_at' => $date,
+            'updated_at' => $date,
         ];
     }
 }
