@@ -39,7 +39,10 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $model = new CourseResource($course);
+        // dd($course);
+        //dd(Course::where('id', $course->id)->get());
+        //dd($course->with('category'));
+        $model = new CourseResource($course->load('instructor.instructedCourses'));
         $related = CourseResource::collection(Course::related(['title' => $course->title])->get());
         $ratings = RatingResource::collection($course->ratings);
         return Inertia::render("Course/Show", compact('model', 'related', 'ratings'));
