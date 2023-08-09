@@ -19,6 +19,7 @@ class RatingResource extends JsonResource
             'id' => $this->id,
             'rating' => $this->rating,
             'review' => $this->review,
+            'updated_at' => $this->updated_at,
             'user' => new UserResource($this->user),
         ];
     }
