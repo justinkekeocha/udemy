@@ -34,7 +34,7 @@ class CourseResource extends JsonResource
             'instructor' => new UserResource($this->instructor),
             'subCategory' => new SubCategoryResource($this->topic->subCategory),
             'category' => new CategoryResource($this->topic->subCategory->category),
-            'update_at' => $this->updated_at
+            'updated_at' => $this->updated_at
         ];
     }
 }
