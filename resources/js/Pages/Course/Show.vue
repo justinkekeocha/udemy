@@ -1,6 +1,7 @@
 <script setup>
 import StarRating from '../../Components/StarRating.vue'
 import CourseCard from '../../Components/Cards/CourseCard.vue';
+import Button3 from '../../Components/Buttons/Button3.vue';
 const props = defineProps({ model: Object, related: Object, ratings: Object })
 import { DateTime } from "luxon";
 </script>
@@ -90,7 +91,7 @@ import { DateTime } from "luxon";
                     <span class="ms-2">English</span>
                 </div>
                 <p class="h1 font-UdemySansBold">₦{{ model.price }}</p>
-                <button class="bg-[#a435f0] w-full h-12 font-UdemySansBold mb-2">Go to cart</button>
+                <Button3>Go to cart</Button3>
                 <p class="text-center text-xs mb-5">30-Day Money-Back Guarantee</p>
                 <div class="flex items-center justify-between underline font-UdemySansBold px-8 text-sm">
                     <button>Share</button>
