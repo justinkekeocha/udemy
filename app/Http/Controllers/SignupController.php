@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class SignupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render("Auth/Login");
+        return Inertia::render("Auth/Signup");
     }
 
     /**
