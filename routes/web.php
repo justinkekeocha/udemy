@@ -15,6 +15,7 @@ use App\Http\Resources\CategoryResource;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\SignupController;
 use App\Http\Resources\SubCategoryResource;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
@@ -60,6 +61,10 @@ Route::prefix('/course/{course}')->controller(CourseController::class)->name('co
 
 Route::prefix('/user')->controller(UserController::class)->name('users.')->group(function () {
    Route::get('/{user}', 'show')->name('show');
+});
+
+Route::prefix('/signup')->controller(SignupController::class)->group(function () {
+   Route::get('/', 'index')->name('signup');
 });
 
 
