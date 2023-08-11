@@ -34,7 +34,7 @@ const topicStore = useTopicStore();
                 </Link>
             </div>
             <!--md:gap-x-5-->
-            <div class="flex hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
+            <div class=" flex hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
                 id="navbar-cta">
                 <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-offset="10"
                     data-popover-placement="bottom">
@@ -151,7 +151,7 @@ const topicStore = useTopicStore();
                     <Link :href="route('login')">
                     <Button1 class="!mb-0 w-full md:w-auto">Log in</Button1>
                     </Link>
-                    <Link :href="route('login')">
+                    <Link :href="route('signup')">
                     <Button2 class="!mb-0  w-full md:w-auto">Sign up</Button2>
                     </Link>
                     <Button1 class="hidden md:block !p-2 !mb-0 ">
