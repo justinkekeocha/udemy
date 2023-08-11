@@ -65,6 +65,7 @@ Route::prefix('/user')->controller(UserController::class)->name('users.')->group
 
 Route::prefix('/signup')->controller(SignupController::class)->group(function () {
    Route::get('/', 'index')->name('signup');
+   Route::post('/', 'store');
 });
 
 
