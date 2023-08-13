@@ -2,15 +2,63 @@
 import Input1 from '../../Components/Forms/Inputs/Input1.vue';
 import Button3 from '../../Components/Buttons/Button3.vue';
 import { useForm } from '@inertiajs/vue3'
-import { ref, computed } from 'vue'
+import { ref, watch, } from 'vue'
+import { debounce } from 'radash';
+import { useAnalyzeRegex } from "../../Composables/AnalyzeRegex";
 
 const form = useForm({
     name: null,
     email: null,
     password: null,
 })
-
 const showPassword = ref(false)
+
+const passwordStrengthContainer = ref(null);
+//First argument is a getter function
+//https://vuejs.org/guide/essentials/watchers.html#watch-source-types
+watch(() => form.password, () => {
+    debounce({ delay: 300 }, StrengthChecker(form.password))
+
+})
+
+function StrengthChecker(PasswordParameter) {
+    // The strong and weak password Regex pattern checker
+    let passwordStrengthNodeList = passwordStrengthContainer.value.childNodes;
+    let strengthMessageContainer = passwordStrengthNodeList[4]
+
+    //Remove everything
+    strengthMessageContainer.innerHTML = '';
+    passwordStrengthNodeList[0].classList.remove("!bg-black")
+    passwordStrengthNodeList[1].classList.remove("!bg-black")
+    passwordStrengthNodeList[2].classList.remove("!bg-black")
+    passwordStrengthNodeList[3].classList.remove("!bg-black")
+
+    if (PasswordParameter != 0) {
+
+        const analyzeRegex = useAnalyzeRegex(PasswordParameter)
+
+        //Eg: @Password39
+        if (analyzeRegex.strength > 0) {
+            strengthMessageContainer.innerHTML = 'Too weak'
+            passwordStrengthNodeList[0].classList.add("!bg-black")
+        }
+        if (analyzeRegex.strength > 1) {
+            strengthMessageContainer.innerHTML = 'Could be Stronger'
+            passwordStrengthNodeList[1].classList.add("!bg-black")
+        }
+
+        if (analyzeRegex.strength > 2) {
+            strengthMessageContainer.innerHTML = 'Strong password'
+            passwordStrengthNodeList[2].classList.add("!bg-black")
+        }
+
+        if (analyzeRegex.strength > 3) {
+            strengthMessageContainer.innerHTML = 'Very strong password'
+            passwordStrengthNodeList[3].classList.add("!bg-black")
+        }
+    }
+
+}
 </script>
 <template>
     <Layout :title="'Sign up and start learning | ' + $page.props.appName" description="hello">
@@ -22,7 +70,8 @@ const showPassword = ref(false)
                 <form class="flex flex-col gap-2" @submit.prevent="form.post('/signup')">
                     <Input1 label="Full Name" v-model="form.name" type="text" required></Input1>
                     <Input1 label="Email" v-model="form.email" type="text" required></Input1>
-                    <Input1 label="Password" v-model="form.password" :type="[showPassword ? 'text' : 'password']" required="">
+                    <Input1 label="Password" v-model="form.password" :type="[showPassword ? 'text' : 'password']" required>
+                        {{ form.password }}
                         <button type="button" class="absolute inset-y-4 right-4" @click="showPassword = !showPassword">
                             <template v-if="showPassword">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -47,11 +96,12 @@ const showPassword = ref(false)
                             </template>
                         </button>
                     </Input1>
-                    <div class="flex items-center gap-1 my-2">
+                    <div class="flex items-center gap-1 my-2" ref="passwordStrengthContainer">
                         <div class="rounded bg-gray-300 h-1 w-12"></div>
                         <div class="rounded bg-gray-300 h-1 w-12"></div>
                         <div class="rounded bg-gray-300 h-1 w-12"></div>
                         <div class="rounded bg-gray-300 h-1 w-12"></div>
+                        <span class="text-xs ms-1 text-neutral-500"></span>
                     </div>
                     <div class="flex">
                         <input type="checkbox" value=""
