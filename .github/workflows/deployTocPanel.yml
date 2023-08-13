@@ -64,7 +64,7 @@ jobs:
         id: clearCache
         uses: fjogeleit/http-request-action@v1
         with:
-          url: "https://udemy.jaycode.dev/production/cache"
+          url: "https://udemy.jaycode.dev/clear-cache"
           method: "GET"
           timeout: 60000
       - name: Show Response
