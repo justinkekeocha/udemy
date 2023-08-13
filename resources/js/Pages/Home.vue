@@ -1,5 +1,4 @@
 <script setup>
-import { useGroupArrayByKey } from "../Composables/GroupArrayByKey";
 import Slide from "../Components/Slides/Slide.vue"
 import Carousel from '../Components/Carousels/Carousel.vue';
 import CarouselControls from '../Components/Carousels/CarouselControls.vue'
@@ -10,7 +9,6 @@ import { useSubCategoryStore } from "@/Stores/SubCategoryStore";
 import { useTopicStore } from "@/Stores/TopicStore";
 import { useCourseStore } from "@/Stores/CourseStore";
 
-import { onMounted } from 'vue'
 
 const props = defineProps({
     categories: Object,
