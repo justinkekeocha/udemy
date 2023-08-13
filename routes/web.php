@@ -42,7 +42,7 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
    return Inertia::render("Test");
-})->name('home');
+});
 
 Route::prefix('/courses/{category}')->group(function () {
    Route::controller(CategoryController::class)->name('categories.')->group(function () {
