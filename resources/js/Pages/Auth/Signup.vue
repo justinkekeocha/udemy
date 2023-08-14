@@ -22,7 +22,7 @@ watch(() => form.password, () => {
 })
 
 function StrengthChecker(PasswordParameter) {
-    // The strong and weak password Regex pattern checker
+    //Get the password strength container
     let passwordStrengthNodeList = passwordStrengthContainer.value.childNodes;
     let strengthMessageContainer = passwordStrengthNodeList[4]
 
