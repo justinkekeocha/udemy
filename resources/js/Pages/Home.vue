@@ -250,31 +250,31 @@ courseStore.getCourses();
         </section>
 
         <section class="p-12">
-            <h2 class="text-2xl leading-5 tracking-tight text-center mb-2">Trusted by over 13,400 great teams
-            </h2>
-            <p class="text-center mb-5">Leading companies use the same courses to help employees keep their skills fresh.
-            </p>
-            <div class="grid grid-cols-12 gap-5 mb-3">
-                <div class="col-span-6 md:col-span-2">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg">
+                <h2 class="text-2xl leading-5 tracking-tight text-center mb-2">Trusted by over 13,400 great teams
+                </h2>
+                <p class="text-center mb-5">Leading companies use the same courses to help employees keep their skills fresh.
+                </p>
+                <div class="grid grid-cols-12 gap-5 mb-3">
+                    <div class="col-span-6 md:col-span-2">
+                        <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg">
+                    </div>
+                    <div class="col-span-6 md:col-span-2">
+                        <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg">
+                    </div>
+                    <div class="col-span-6 md:col-span-2">
+                        <img src="https://s.udemycdn.com/partner-logos/v4/box-dark.svg">
+                    </div>
+                    <div class="col-span-6 md:col-span-2">
+                        <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg">
+                    </div>
+                    <div class="col-span-6 md:col-span-2">
+                        <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg">
+                    </div>
+                    <div class="col-span-6 md:col-span-2">
+                        <img src="https://s.udemycdn.com/partner-logos/v4/tcs-dark.svg">
+                    </div>
                 </div>
-                <div class="col-span-6 md:col-span-2">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg">
-                </div>
-                <div class="col-span-6 md:col-span-2">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/box-dark.svg">
-                </div>
-                <div class="col-span-6 md:col-span-2">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg">
-                </div>
-                <div class="col-span-6 md:col-span-2">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg">
-                </div>
-                <div class="col-span-6 md:col-span-2">
-                    <img src="https://s.udemycdn.com/partner-logos/v4/tcs-dark.svg">
-                </div>
-            </div>
-        </section>
+            </section>
 
         <section class="px-5 md:px-56 py-16 bg-slate-50">
             <Carousel class="mb-14">
