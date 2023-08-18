@@ -41,7 +41,7 @@ class SignupController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => Str::headline(ucwords($request->name)),
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'slug' => Str::lower(str_replace(' ', '', $request->name)),
@@ -51,7 +51,7 @@ class SignupController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('home');
     }
 
     /**
