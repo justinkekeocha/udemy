@@ -177,6 +177,46 @@ const topicStore = useTopicStore();
                     <p class="text-violet-800 font-extrabold">Keep shopping</p>
                 </Popover>
             </div>
+            <!-- <div>
+                <button
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-black text-white font-UdemySansBold"
+                    data-popover-target="profilePopover" data-popover-offset="20" data-popover-placement="bottom">
+                    <span>JK</span></button>
+                <Popover target="profilePopover" class="max-w-xs !-left-2.5 py-5">
+                    <div class="flex items-center gap-2  px-2">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-black text-white font-UdemySansBold"
+                            data-popover-target="profilePopover" data-popover-offset="20" data-popover-placement="bottom">
+                            <span>JK</span>
+                        </div>
+                        <div class="flex flex-col items-start text-sm ">
+                            <p class="font-UdemySansBold">Kekeocha Justin</p>
+                            <p class="text-neutral-500">justinratzinger@gmail.com</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <ul class="space-y-2 text-zinc-800 hover:[&>*]:text-violet-700 px-2">
+                        <li>
+                            My learning
+                        </li>
+                        <li>
+                            My cart
+                        </li>
+                        <li>
+                            Wishlist
+                        </li>
+                    </ul>
+                    <hr>
+                    <ul class="space-y-2 text-zinc-800 hover:[&>*]:text-violet-700 px-2">
+                        <li>
+                            <Link :href="route('users.logout')">
+                            Log out
+                            </Link>
+                        </li>
+
+                    </ul>
+                </Popover>
+            </div>-->
+
         </div>
     </nav>
 </template>
