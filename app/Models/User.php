@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'slug',
     ];
 
     /**
@@ -61,6 +62,14 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: fn () => route('users.show', ['user' => $this->slug])
+        );
+    }
+
+    protected function photo(): Attribute
+    {
+        //https://carlesto.com/assets/img/user-default-avatar.png
+        return Attribute::make(
+            get: fn ($value) => is_null($value) ? 'https://carlesto.com/assets/img/user-default-avatar.png' : $value,
         );
     }
 }
