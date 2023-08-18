@@ -59,20 +59,36 @@ function StrengthChecker(PasswordParameter) {
     }
 
 }
+
+const handleSignup = () => {
+    //https://inertiajs.com/forms#server-side-validation
+    const options = {
+        preserveScroll: true,
+        onBefore: () => {
+            form.clearErrors()
+        },
+        onSuccess: () => form.reset(),
+    }
+    form.submit('post', '/signup', options)
+
+}
 </script>
 <template>
     <Layout :title="'Sign up and start learning | ' + $page.props.appName" description="hello">
 
-        <section class="my-10 max-w-xs mx-auto ">
+        <section class="my-10 max-w-[21rem] mx-auto ">
             <h1 class="text-base font-UdemySansBold mb-3">Sig up and start learning</h1>
             <div class="flex flex-col gap-2">
 
-                <form class="flex flex-col gap-2" @submit.prevent="form.post('/signup')">
-                    <Input1 label="Full Name" v-model="form.name" type="text" required></Input1>
+                <form class="flex flex-col gap-2" @submit.prevent="handleSignup">
+                    <Input1 label="Full Name" v-model="form.name" type="text" required>
+                    </Input1>
                     <Input1 label="Email" v-model="form.email" type="text" required></Input1>
+                    <div v-if="form.errors.email" class="text-red-600">{{ form.errors.email }}</div>
                     <Input1 label="Password" v-model="form.password" :type="[showPassword ? 'text' : 'password']" required>
-                        {{ form.password }}
-                        <button type="button" class="absolute inset-y-4 right-4" @click="showPassword = !showPassword">
+                        <div v-if="form.errors.password" class="text-red-600">{{ form.errors.password }}</div>
+                        <button type="button" class="absolute inset-y-4 right-4" @click="showPassword = !showPassword"
+                            :disabled="form.processing">
                             <template v-if="showPassword">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="w-6 h-6">
