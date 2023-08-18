@@ -33,10 +33,6 @@ use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {
    $categories = CategoryResource::collection(Category::with(['subCategories', 'topics'])->get());
-   // $subCategories = SubCategoryResource::collection(SubCategory::all());
-   // $courses =  CourseResource::collection(Course::all());
-   // $topics = TopicResource::collection(Topic::all());
-   // return Inertia::render("Home", compact('categories', 'subCategories', 'courses', 'topics'));
    return Inertia::render("Home", compact('categories'));
 })->name('home');
 
@@ -65,6 +61,9 @@ Route::prefix('/course/{course}')->controller(CourseController::class)->name('co
 
 Route::prefix('/user')->controller(UserController::class)->name('users.')->group(function () {
    Route::get('/{user}', 'show')->name('show');
+   Route::middleware('auth')->group(function () {
+      Route::get('/logout', 'logout')->name('logout');
+   });
 });
 
 Route::prefix('/signup')->controller(SignupController::class)->group(function () {
