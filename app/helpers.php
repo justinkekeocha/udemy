@@ -1,4 +1,4 @@
-<?
+<?php
 function moveMarchDate($date)
 {
     $time = strtotime($date);
