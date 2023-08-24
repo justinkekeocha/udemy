@@ -27,7 +27,7 @@ defineProps({
         
         slides-container flex snap-x snap-mandatory space-x-2 scroll-smooth overflow-x-auto
         -->
-        <div class="slides-container grid grid-flow-col auto-cols-max gap-4 overflow-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth touch-manipulation"
+        <div class="slides-container grid grid-flow-col auto-cols-max gap-4 overflow-auto overflow-y-hidden [scrollbar-width:none] [-ms-overflow-style:none] snap-x snap-mandatory scroll-smooth touch-manipulation"
             data-slide-container v-bind="$attrs">
             <slot></slot>
             <!-- Slider controls -->
