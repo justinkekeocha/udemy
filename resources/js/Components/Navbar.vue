@@ -4,7 +4,6 @@ import { useCategoryStore } from "@/Stores/CategoryStore";
 import { useSubCategoryStore } from "@/Stores/SubCategoryStore";
 import { useTopicStore } from "@/Stores/TopicStore";
 import Dropdown from "./Dropdown.vue";
-import { onMounted } from 'vue'
 
 const categoryStore = useCategoryStore();
 const subCategoryStore = useSubCategoryStore();
@@ -34,7 +33,7 @@ const topicStore = useTopicStore();
                 </Link>
             </div>
             <!--md:gap-x-5-->
-            <div class=" flex hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
+            <div class="hidden md:flex flex-col  md:flex-row items-start md:items-center justify-between  w-full md:w-auto text-base md:text-sm gap-4 md:grow order-2 md:order-none p-4 md:p-0 border border-gray-100 rounded-lg md:border-0 mt-4 md:mt-0 bg-gray-50 md:bg-white "
                 id="navbar-cta">
                 <button class=" hover:text-purple-600" data-popover-target="categories" data-popover-offset="10"
                     data-popover-placement="bottom">
